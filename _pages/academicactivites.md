@@ -1,5 +1,5 @@
 ---
-permalink: /academicactivities
+permalink: /academicactivities/
 title: "Academic Activities"
 excerpt: "About me"
 author_profile: true
