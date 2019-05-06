@@ -1,10 +1,10 @@
 ---
-permalink: /academicactivities/
+permalink: /academicactivities
 title: "Academic Activities"
 excerpt: "About me"
 author_profile: true
 redirect_from:
-  - /academicactivities
+#  - /academicactivities
   - /academicactivities.html
 ---
 + [2018] Visiting at [Spritz@University of Padua](http://spritz.math.unipd.it/), supervised by [Mauro Conti](http://www.math.unipd.it/~conti/)  
