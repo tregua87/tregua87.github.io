@@ -6,8 +6,11 @@ main:
   - title: "Academic Activities"
     url: /academicactivities/
 
-  #- title: "Talks"
-  #  url: /talks/
+  - title: "Resume"
+    url: /files/resume.pdf
+
+  # - title: "Talks"
+  #   url: /talks/
 
   #- title: "Teaching"
   #  url: /teaching/
@@ -17,9 +20,6 @@ main:
 
   #- title: "Blog Posts"
   #  url: /year-archive/
-
-  #- title: "CV"
-  #  url: /cv/
 
   #- title: "Guide"
   #  url: /markdown/
