@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2019-03-careful
 excerpt:
 date: "March 2019"
-venue: '9th ACM Conference on Data and Application Security and Privacy'
+venue: 'The 9th ACM Conference on Data and Application Security and Privacy'
 paperurl: 'https://dl.acm.org/citation.cfm?id=3300029'
 citation:
 ---
