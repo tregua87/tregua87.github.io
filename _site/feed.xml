@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://127.0.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000/" rel="alternate" type="text/html" /><updated>2019-07-28T13:45:32-07:00</updated><id>http://127.0.0.1:4000/feed.xml</id><title type="html">Flavio Toffalini</title><subtitle>Ph.D. Student SUTD</subtitle><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><entry><title type="html">A Simple Network of Docker Containers</title><link href="http://127.0.0.1:4000/posts/2019/07/docker-network/" rel="alternate" type="text/html" title="A Simple Network of Docker Containers" /><published>2019-07-08T00:00:00-07:00</published><updated>2019-07-08T00:00:00-07:00</updated><id>http://127.0.0.1:4000/posts/2019/07/docker-network</id><content type="html" xml:base="http://127.0.0.1:4000/posts/2019/07/docker-network/">&lt;p&gt;The goal of this article is to illustrate a basic Docker configuration
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://127.0.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000/" rel="alternate" type="text/html" /><updated>2019-07-28T13:53:05-07:00</updated><id>http://127.0.0.1:4000/feed.xml</id><title type="html">Flavio Toffalini</title><subtitle>Ph.D. Student SUTD</subtitle><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><entry><title type="html">A Simple Network of Docker Containers</title><link href="http://127.0.0.1:4000/posts/2019/07/docker-network/" rel="alternate" type="text/html" title="A Simple Network of Docker Containers" /><published>2019-07-08T00:00:00-07:00</published><updated>2019-07-08T00:00:00-07:00</updated><id>http://127.0.0.1:4000/posts/2019/07/docker-network</id><content type="html" xml:base="http://127.0.0.1:4000/posts/2019/07/docker-network/">&lt;p&gt;The goal of this article is to illustrate a basic Docker configuration
 that simulates a network of virtual devices.
 For sake of simplicity, each Docker container runs the same application,
 however, it is possible to run containers with different applications.
@@ -45,6 +45,7 @@ To make the work easier for the laziest, I made a small repository with all the 
   &lt;li&gt;&lt;a href=&quot;#network-configuration&quot;&gt;Network Configuration&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#start-stop-and-network-control&quot;&gt;Start-stop and network control&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#log-collection&quot;&gt;Log Collection&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
@@ -257,4 +258,11 @@ Then, give some execution permission:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;This script just copies the local logs of each container to the host in the following way:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./extractlog.sh 10
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><category term="docker" /><category term="virtual-network" /><summary type="html">The goal of this article is to illustrate a basic Docker configuration that simulates a network of virtual devices. For sake of simplicity, each Docker container runs the same application, however, it is possible to run containers with different applications. Having a large network helps studying the behavior of distributed algorithms without handling physical or virtual machines. In addition, I also discuss a simple way to logging in a scalable manner.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This example shows the basic steps to build, start, and stop a network of Docker containers.
+For simplicity, I collected all the previous scripts in a simple &lt;a href=&quot;https://github.com/tregua87/DockerNetwork&quot;&gt;repository&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Don’t hesitate to contact me for any reason!&lt;/p&gt;</content><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><category term="docker" /><category term="virtual-network" /><summary type="html">The goal of this article is to illustrate a basic Docker configuration that simulates a network of virtual devices. For sake of simplicity, each Docker container runs the same application, however, it is possible to run containers with different applications. Having a large network helps studying the behavior of distributed algorithms without handling physical or virtual machines. In addition, I also discuss a simple way to logging in a scalable manner.</summary></entry></feed>

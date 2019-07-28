@@ -47,6 +47,7 @@ The rest of the post is organized as follows:
 - [Network Configuration](#network-configuration)
 - [Start-stop and network control](#start-stop-and-network-control)
 - [Log Collection](#log-collection)
+- [Conclusion](#conclusion)
 
 ## Overview ##
 
@@ -273,6 +274,12 @@ This script just copies the local logs of each container to the host in the foll
 ```
 ./extractlog.sh 10
 ```
+
+## Conclusion ##
+
+This example shows the basic steps to build, start, and stop a network of Docker containers.
+For simplicity, I collected all the previous scripts in a simple [repository](https://github.com/tregua87/DockerNetwork).  
+Don't hesitate to contact me for any reason!
 
 [1]: https://www.hostinger.com/tutorials/how-to-install-and-use-docker-on-ubuntu/ "Docker installation"
 [2]: https://docs.docker.com/compose/install/ "Docker compose installation"
