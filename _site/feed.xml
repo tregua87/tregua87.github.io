@@ -1,1 +1,260 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://127.0.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000/" rel="alternate" type="text/html" /><updated>2019-07-07T06:11:38-07:00</updated><id>http://127.0.0.1:4000/feed.xml</id><title type="html">Flavio Toffalini</title><subtitle>Ph.D. Student SUTD</subtitle><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://127.0.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000/" rel="alternate" type="text/html" /><updated>2019-07-28T13:45:32-07:00</updated><id>http://127.0.0.1:4000/feed.xml</id><title type="html">Flavio Toffalini</title><subtitle>Ph.D. Student SUTD</subtitle><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><entry><title type="html">A Simple Network of Docker Containers</title><link href="http://127.0.0.1:4000/posts/2019/07/docker-network/" rel="alternate" type="text/html" title="A Simple Network of Docker Containers" /><published>2019-07-08T00:00:00-07:00</published><updated>2019-07-08T00:00:00-07:00</updated><id>http://127.0.0.1:4000/posts/2019/07/docker-network</id><content type="html" xml:base="http://127.0.0.1:4000/posts/2019/07/docker-network/">&lt;p&gt;The goal of this article is to illustrate a basic Docker configuration
+that simulates a network of virtual devices.
+For sake of simplicity, each Docker container runs the same application,
+however, it is possible to run containers with different applications.
+Having a large network helps studying the behavior of distributed algorithms
+without handling physical or virtual machines.
+In addition, I also discuss a simple way to logging in a scalable manner.&lt;/p&gt;
+
+&lt;p&gt;I faced this problem in a recent research project where I needed to simulate a large
+number of IoT devices.
+The application developed, basically, implemented a &lt;a href=&quot;https://en.wikipedia.org/wiki/Distributed_hash_table&quot; title=&quot;Distributed Hash Table&quot;&gt;Distributed Hash Table&lt;/a&gt;.
+This configuration enabled me to measure large scale properties,
+such as logarithmic research and network traffic.
+All of these without running out of grants :)&lt;/p&gt;
+
+&lt;p&gt;In this article, I will use a dummy network application.
+I however plan to release the full open source code, along with the research
+paper, after acceptance.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;br /&gt;
+You can save all the following scripts and configuration files
+in the same folder and run all the commands in the that folder.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;TR;&lt;/strong&gt;&lt;br /&gt;
+To make the work easier for the laziest, I made a small repository with all the following examples at this &lt;a href=&quot;https://github.com/tregua87/DockerNetwork&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;To sum up, what you will find in this article is:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Basic Docker container configuration.&lt;/li&gt;
+  &lt;li&gt;Practical tips for handling networks of Docker containers.&lt;/li&gt;
+  &lt;li&gt;Defining and managing a network of Docker containers, in particular:
+    &lt;ul&gt;
+      &lt;li&gt;How to start/stop the network in a controlled way.&lt;/li&gt;
+      &lt;li&gt;Collect logs in a scalable fashion.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The rest of the post is organized as follows:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#preliminaries&quot;&gt;Preliminaries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#entry-point&quot;&gt;Entry Point&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#docker-image&quot;&gt;Docker Image&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#network-configuration&quot;&gt;Network Configuration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#start-stop-and-network-control&quot;&gt;Start-stop and network control&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#log-collection&quot;&gt;Log Collection&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;First thing first, let me describe what we are going to do.&lt;br /&gt;
+Our network is composed by a number X of devices, called &lt;strong&gt;peers&lt;/strong&gt;.
+The peers communicate with a central node, called &lt;strong&gt;entry point&lt;/strong&gt;.
+Technically speaking, the entry point is implemented by our PC.
+The peers are, instead, implemented by docker containers.&lt;br /&gt;
+The network can be depicted as follows.
+&lt;img src=&quot;https://docs.google.com/drawings/d/e/2PACX-1vTftn7rqcM65FiUHK_ldUlmpH1XNu-Y7_1-X9rUsG9TjGOg8PUKqvHiylXwj-MyZkc2xFpSuWtZL3y7/pub?w=702&amp;amp;h=451&quot; alt=&quot;A Network!&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The purpose of this network is simple but still important.
+The entry point listens to communications from the peers.
+Meanwhile, the peers contact the entry point.
+During the execution, both peers and entry point write a local log file
+(i.e., in the respective container). Then, I will collect their log after
+an experiment session.&lt;/p&gt;
+
+&lt;h2 id=&quot;preliminaries&quot;&gt;Preliminaries&lt;/h2&gt;
+
+&lt;p&gt;Before going to the meat, we need some preliminary installation.
+If you have already installed these tings, then, go ahead!&lt;br /&gt;
+Docker is a quite flexible technology that allows installing so-called
+containers.
+In a nutshell, a container is an object that provides all the needs for the
+application, while it relies on the host OS kernel.
+In my experiments, I used a classic Ubuntu 18.04.
+The application is written in Python and requires Flask, while
+the network is handled by &lt;em&gt;Docker compose&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;To install the requirements, just open a terminal and let’s start with Docker.
+I referred to this &lt;a href=&quot;https://www.hostinger.com/tutorials/how-to-install-and-use-docker-on-ubuntu/&quot; title=&quot;Docker installation&quot;&gt;guide&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install  curl apt-transport-https ca-certificates software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;
+sudo apt update
+sudo apt install docker-ce
+sudo systemctl status docker
+# to avoid further issues, we set ourselves as docker users
+sudo groupadd docker # this may return an error
+sudo usermod -aG docker $USER
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;For &lt;em&gt;Docker compose&lt;/em&gt;, I followed this &lt;a href=&quot;https://docs.docker.com/compose/install/&quot; title=&quot;Docker compose installation&quot;&gt;guide&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# install curl, who never knows
+sudo apt update &amp;amp;&amp;amp; sudo apt install curl
+sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+# restart the shell
+docker-compose --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;NOTE: afaik, new versions of Docker should allow handling groups of containers
+like Docker compose does. However, I found much easier this approach.&lt;/p&gt;
+
+&lt;p&gt;For Python and Flask, instead, the things are much simpler:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt update
+sudo apt install python3 python3-pip
+pip3 install flask
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;entry-point&quot;&gt;Entry Point&lt;/h2&gt;
+&lt;p&gt;The entry point is a simple Web browser written in Python3 and Flask.
+Let’s have a look to this simple code.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/python3&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;socket&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;usage: {0} &amp;lt;logfile&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;peerips&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/add'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;global&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;peerips&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# ip = request.args.get('peer-ip')&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remote_addr&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;peerips&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;done&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;miss peer-ip&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2222&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'0.0.0.0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Just dump the former code in a file, e.g., &lt;code class=&quot;highlighter-rouge&quot;&gt;app_pc.py&lt;/code&gt;. It will be useful later.&lt;/p&gt;
+
+&lt;p&gt;Also, don’t forget.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chmod +x ./app_pc.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The scope of the entry point is quite simple, it receives a &lt;em&gt;ping&lt;/em&gt; from the peers
+and makes a local log.
+Clearly, this is just an example to show how peers and entry point exchange messages.&lt;/p&gt;
+
+&lt;h2 id=&quot;docker-image&quot;&gt;Docker Image&lt;/h2&gt;
+
+&lt;p&gt;As stated before, any peer is a Docker container.&lt;/p&gt;
+
+&lt;p&gt;Basically, create a new file, called &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, and dump inside the following text.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:latest
+
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install wget -y
+
+RUN mkdir -p /home/peer
+COPY . /home/peer/
+
+CMD wget 172.20.0.2:2222/add; sleep 50; echo &quot;My IP is `hostname -I | awk '{print $1}'`&quot; &amp;gt; local.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The peer is quite simple. When it boots, it will contact the entry point by using
+a &lt;code class=&quot;highlighter-rouge&quot;&gt;wget&lt;/code&gt;. This action sends the peer IP to the entry point, which is then logged.&lt;/p&gt;
+
+&lt;p&gt;From the Dockerfile previously described, we create a Docker image by throwing:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build -t &quot;docker-network-peer&quot; .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;network-configuration&quot;&gt;Network Configuration&lt;/h2&gt;
+
+&lt;p&gt;Docker-compose can help handling interesting and complex sets of containers.
+In this setting, we use this tool to run and stop an arbitrary
+number of peers.
+One of the most useful thing of docker-compose is the ability
+to group a lot of boring setting in a simple configuration file
+called &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt;.
+In my case, I used docker-compose to setting a virtual network called &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-network-test&lt;/code&gt; and to run/stop the peers.&lt;/p&gt;
+
+&lt;p&gt;Save a &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; file with the following content:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+
+services:
+  peer:
+    image: docker-network-peer:latest
+    networks:
+     - docker-network-test
+
+networks:
+    docker-network-test:
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+          - subnet: 172.20.0.0/16
+            gateway: 172.20.0.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;In the next session, we see how to run the entire network.&lt;/p&gt;
+
+&lt;h2 id=&quot;start-stop-and-network-control&quot;&gt;Start-stop and network control&lt;/h2&gt;
+
+&lt;p&gt;Open a shell and start the entry point:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 app_pc.py entrypoint.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;In another shell, launch the peers:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker-compose up --scale peer=10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The former command launches 10 peers.
+Then, wait until everything finishes.
+Finally, close the server with a classic &lt;code class=&quot;highlighter-rouge&quot;&gt;ctrl+c&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In my example, each peer shuts down itself.
+If your peer application is meant to run for an undetermined time, you can use a command like that:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker-compose up --scale peer=10; sleep 60; docker-compose stop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This command runs 10 peers, sleep for 60 seconds, and then stop itself.&lt;/p&gt;
+
+&lt;p&gt;After the execution, we have this situation:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;each Docker container has a local log file&lt;/li&gt;
+  &lt;li&gt;the entry point has its own log file, which is saved in the host.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;log-collection&quot;&gt;Log Collection&lt;/h2&gt;
+
+&lt;p&gt;To collect and inspect the logs, we can do:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Entry points&lt;/strong&gt;&lt;br /&gt;
+This is pretty simple, the entry point saves its log in the host machine.
+So, you can read it in this way:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cat entrypoint.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Peers&lt;/strong&gt;&lt;br /&gt;
+Each peer saves its log in the container, which is basically a file system not normally accessible from the host.
+For instance, to read the log from the container 1, you can use the following command.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker cp dockernetwork_peer_1:/local.txt ./log1.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;It is possible to automatize the log extraction by using the following script:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;NDEV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;NDEV: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NDEV&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;i &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;seq &lt;span class=&quot;nv&quot;&gt;$NDEV&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+  &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;
+  docker cp dockernetwork_peer_&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;:/local.txt ./log&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;.txt
+&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Just save this code in a script called &lt;code class=&quot;highlighter-rouge&quot;&gt;extractlog.sh&lt;/code&gt;.
+Then, give some execution permission:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chmod +x extractlog.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This script just copies the local logs of each container to the host in the following way:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./extractlog.sh 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><category term="docker" /><category term="virtual-network" /><summary type="html">The goal of this article is to illustrate a basic Docker configuration that simulates a network of virtual devices. For sake of simplicity, each Docker container runs the same application, however, it is possible to run containers with different applications. Having a large network helps studying the behavior of distributed algorithms without handling physical or virtual machines. In addition, I also discuss a simple way to logging in a scalable manner.</summary></entry></feed>
