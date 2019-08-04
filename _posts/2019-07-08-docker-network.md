@@ -197,19 +197,19 @@ FROM ubuntu:latest
 ```
 
 Docker exposes standard images for different OSes. This means that it is easy
-to have a minimum working OS, but the starting image might not be up-to-date.
+to have a minimum working OS, however, the starting image might not be up-to-date.
 Therefore, we run some commands to update the system:
 ```
 RUN apt-get update -y
 RUN apt-get upgrade -y
 ```
-In the end, we install other tools we need, in our case a classic `wget`.
+In the end, we install a classic `wget`.
 ```
 RUN apt-get install wget -y
 ```
 
 All the previous commands starts with `FROM` and `RUN`. In a nutshell, these
-two keywords indicate commands that will be used only in the Docker creation phase.
+two keywords indicate commands that will be used only in the container creation phase.
 This means that they are executed only once. I still suggest you read a full
 guide.
 
@@ -232,8 +232,9 @@ Finally, the container finds its own IP and saves it in a local file within the
 container itself.
 
 After the previous commands, the container stops itself.
-`CMD` can run much more complicate applications. In my paper, I start a software
-written in C. If this is the case, the container doesn't stop until the software
+`CMD` can run much more complicate applications. In my paper, I use a software
+written in C that is based on an infinite loop.
+If this is the case, the container doesn't stop until the software
 stops or the container is stopped externally.
 
 ## Network Configuration ##
@@ -297,7 +298,7 @@ Open a shell, go to `dockernetwork`, and start the entry point:
 cd dockernetwork
 python3 app_pc.py entrypoint.txt
 ```
-In another shell, go to `dockernetwork`, launch the peers:
+In another shell, go to `dockernetwork`, and launch the peers:
 ```
 cd dockernetwork
 docker-compose up --scale peer=10
