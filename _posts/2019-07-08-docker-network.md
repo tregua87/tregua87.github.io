@@ -16,7 +16,7 @@ In addition, I also discuss a simple way to logging in a scalable manner.
 
 I faced this problem in a recent research project where I needed to simulate a large
 number of IoT devices.
-The application developed, basically, implemented a [Distributed Hash Table][3].
+The application developed, basically, implements a [Distributed Hash Table][3].
 This configuration enabled me to measure large scale properties,
 such as logarithmic research and network traffic.
 All of these without running out of grants :)
@@ -77,12 +77,12 @@ cd dockernetwork
 From this point ahead, I assume you run the commands in the folder `dockernetwork`.
 
 **Installation**  
-If you have already installed these tings, then, go ahead!  
+If you have already installed these things, then, go ahead!  
 Docker is a quite flexible technology that allows installing so-called
 containers.
 In a nutshell, a container is an object that provides all the needs for the
 application, while it relies on the host OS kernel.
-In my experiments, I used a classic Ubuntu 18.04.
+In my experiments, I used an Ubuntu 18.04.
 The application is written in Python and requires Flask, while
 the network is handled by *Docker compose*.
 
@@ -101,7 +101,7 @@ sudo usermod -aG docker $USER
 ```
 For *Docker compose*, I followed this [guide][2].
 ```
-# install curl, who never knows
+# install curl, one never knows
 sudo apt update && sudo apt install curl
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
@@ -160,14 +160,14 @@ The scope of the entry point is quite simple.
 It is a simple Web server that is listening
 requests at the url `http://XX.XX.XX.XX:2222/add`.
 At every `GET` request from a peer, the entry point extracts the IP address of
-the sender and save it in a local log file.
+the sender and saves it in a local log file.
 
 ## Docker Container ##
 
 As stated before, any peer is a Docker container.
 
 To create a Docker container, we first define its image.
-Basically, create a new file, called `Dockerfile`, and dump inside the following text.
+Basically, create a new file, called `Dockerfile`, and dump inside it the following text.
 ```
 FROM ubuntu:latest
 
@@ -192,19 +192,19 @@ Here, I briefly explain the `Dockerfile`. However, I suggest you read a plethora
 and deeper tutorials that discuss [Docker][4].
 
 The first line indicates the base OS on top of which we build our container.
-In our case, I start from a classic Ubuntu.
+In our case, I start from an Ubuntu.
 ```
 FROM ubuntu:latest
 ```
-
-Docker exposes standard images for different OSes. This means that it is easy
-to have a minimum working OS, however, the starting image might not be up-to-date.
+When you create a Docker container, the system downloads a minimal image, in our
+case based on Ubuntu. These OSes contain a minimal file system and utilities
+(e.g., apt-get). However, they are not usually up-to-date.
 Therefore, we run some commands to update the system:
 ```
 RUN apt-get update -y
 RUN apt-get upgrade -y
 ```
-In the end, we install a classic `wget`.
+In the end, we install `wget`.
 ```
 RUN apt-get install wget -y
 ```
@@ -232,11 +232,10 @@ Then, the container sleeps for 50 seconds.
 Finally, the container finds its own IP and saves it in a local file within the
 container itself.
 
-After the previous commands, the container stops itself.
-`CMD` can run much more complicate applications. In my paper, I use a software
-written in C that is based on an infinite loop.
-If this is the case, the container doesn't stop until the software
-stops or the container is stopped externally.
+A container stops working once the command issued by `CMD` ends its execution.
+In my paper, I use a software that is based on an infinite loop to avoid a container
+to stop.
+If this is the case, we need to stop the container externally.
 
 ## Network Configuration ##
 
@@ -246,7 +245,7 @@ number of peers.
 One of the most useful thing of docker-compose is the ability
 to group a lot of boring setting in a simple configuration file
 called `docker-compose.yml`.
-In my case, I used docker-compose to setting a virtual network called `docker-network-test` and to run/stop the peers.
+In my case, I used docker-compose to set a virtual network called `docker-network-test` and to run/stop the peers.
 
 Save a `docker-compose.yml` file with the following content:
 ```
@@ -287,8 +286,10 @@ The network then requires further tuning:
 ```
 These two commands define the space address of the virtual network. The containers
 will pick an IP from this space.
-The `gateway`, instead, will be used by the `TUN` interface. Thus, when the containers
-contact this address, they will actually communicate with the host OS.
+The `gateway`, instead, have two functionalities:
+1) it sets a `TUN` interface in the host with the gateway address, and
+2) it sets a gateway address in the containers.
+In this way, the containers can reach the host through the gateway address.
 
 In the next session, we see how to run the entire network.
 
@@ -306,7 +307,7 @@ docker-compose up --scale peer=10
 ```
 The former command launches 10 peers.
 Then, wait until everything finishes.
-Finally, close the entry point with a classic `ctrl+c`.
+Finally, you shall close the entry point by typing `ctrl+c`.
 
 In my example, each peer shuts down itself.
 If your peer application is meant to run for an undetermined time, you can use a command like that:
@@ -320,8 +321,8 @@ After the execution, we have this situation:
 2. the entry point has its own log file, which is saved in the host.
 
 **TIP**  
-When you stop the Docker containers externally, e.g., `docker-compose stop`.
-You are actually sending a signal to each single container.
+When you stop the Docker containers externally, e.g., `docker-compose stop`,
+you are actually sending a signal to each single container.
 The applications within the container can be written to handle those signals
 and stop their execution properly.
 
