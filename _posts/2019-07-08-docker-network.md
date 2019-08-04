@@ -121,7 +121,7 @@ pip3 install flask
 
 ## Entry Point ##
 
-The entry point is a simple Web browser written in Python3 and Flask.
+The entry point is a simple Web server written in Python3 and Flask.
 Let's have a look to this simple code.
 ```
 #!/usr/bin/python3
