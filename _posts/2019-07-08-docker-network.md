@@ -39,7 +39,7 @@ The rest of the post is organized as follows:
 - [Overview](#overview)
 - [Preliminaries](#preliminaries)
 - [Entry Point](#entry-point)
-- [Docker Image](#docker-image)
+- [Docker Container](#docker-container)
 - [Network Configuration](#network-configuration)
 - [Start-stop and network control](#start-stop-and-network-control)
 - [Log Collection](#log-collection)
@@ -162,10 +162,11 @@ requests at the url `http://XX.XX.XX.XX:2222/add`.
 At every `GET` request from a peer, the entry point extracts the IP address of
 the sender and save it in a local log file.
 
-## Docker Image ##
+## Docker Container ##
 
 As stated before, any peer is a Docker container.
 
+To create a Docker container, we first define its image.
 Basically, create a new file, called `Dockerfile`, and dump inside the following text.
 ```
 FROM ubuntu:latest
@@ -275,7 +276,7 @@ docker-network-peer that was previously explained.
 
 The network used in my example is described after the line `docker-network-test:`.
 Docker provides a number of different network configurations.
-The one more suitable for my purpuse is the `bridge` (i.e., `driver: bridge`).
+The more suitable for my purpuse is the `bridge` (i.e., `driver: bridge`).
 This setting creates a `TUN` network interface in the host OS which
 allows intercommunication with the containers and the physical machine.
 
@@ -317,6 +318,13 @@ This command runs 10 peers, sleep for 60 seconds, and then stop itself.
 After the execution, we have this situation:
 1. each Docker container has a local log file
 2. the entry point has its own log file, which is saved in the host.
+
+**TIP**  
+When you stop the Docker containers externally, e.g., `docker-compose stop`.
+You are actually sending a signal to each single container.
+The applications within the container can be written to handle those signals
+and stop their execution properly.
+
 
 ## Log Collection ##
 
