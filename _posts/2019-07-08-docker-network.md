@@ -67,7 +67,7 @@ an experiment session.
 Before going to the meat, we need some preliminary installation and configuration.
 
 **Configuration**  
-All the following scripts/configuration files can be in the same folder.
+All the following scripts/configuration files can stay in the same folder.
 Therefore, I suggest you create a workspace folder such as:
 ```
 mk dockernetwork
@@ -98,8 +98,6 @@ sudo systemctl status docker
 # to avoid further issues, we set ourselves as docker users
 sudo groupadd docker # this may return an error
 sudo usermod -aG docker $USER
-
-
 ```
 For *Docker compose*, I followed this [guide][2].
 ```
