@@ -158,7 +158,7 @@ chmod +x ./app_pc.py
 
 The scope of the entry point is quite simple.
 It is a simple Web server that is listening
-requests at the url `http:XX.XX.XX.XX:2222/add`.
+requests at the url `http://XX.XX.XX.XX:2222/add`.
 At every `GET` request from a peer, the entry point extracts the IP address of
 the sender and save it in a local log file.
 
