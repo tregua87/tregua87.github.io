@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://127.0.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000/" rel="alternate" type="text/html" /><updated>2019-07-28T13:53:05-07:00</updated><id>http://127.0.0.1:4000/feed.xml</id><title type="html">Flavio Toffalini</title><subtitle>Ph.D. Student SUTD</subtitle><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><entry><title type="html">A Simple Network of Docker Containers</title><link href="http://127.0.0.1:4000/posts/2019/07/docker-network/" rel="alternate" type="text/html" title="A Simple Network of Docker Containers" /><published>2019-07-08T00:00:00-07:00</published><updated>2019-07-08T00:00:00-07:00</updated><id>http://127.0.0.1:4000/posts/2019/07/docker-network</id><content type="html" xml:base="http://127.0.0.1:4000/posts/2019/07/docker-network/">&lt;p&gt;The goal of this article is to illustrate a basic Docker configuration
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://127.0.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.0.1:4000/" rel="alternate" type="text/html" /><updated>2019-08-03T21:13:54-07:00</updated><id>http://127.0.0.1:4000/feed.xml</id><title type="html">Flavio Toffalini</title><subtitle>Ph.D. Student SUTD</subtitle><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><entry><title type="html">A Simple Network of Docker Containers</title><link href="http://127.0.0.1:4000/posts/2019/07/docker-network/" rel="alternate" type="text/html" title="A Simple Network of Docker Containers" /><published>2019-07-08T00:00:00-07:00</published><updated>2019-07-08T00:00:00-07:00</updated><id>http://127.0.0.1:4000/posts/2019/07/docker-network</id><content type="html" xml:base="http://127.0.0.1:4000/posts/2019/07/docker-network/">&lt;p&gt;The goal of this article is to illustrate a basic Docker configuration
 that simulates a network of virtual devices.
 For sake of simplicity, each Docker container runs the same application,
 however, it is possible to run containers with different applications.
@@ -16,10 +16,6 @@ All of these without running out of grants :)&lt;/p&gt;
 &lt;p&gt;In this article, I will use a dummy network application.
 I however plan to release the full open source code, along with the research
 paper, after acceptance.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;br /&gt;
-You can save all the following scripts and configuration files
-in the same folder and run all the commands in the that folder.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;TL;TR;&lt;/strong&gt;&lt;br /&gt;
 To make the work easier for the laziest, I made a small repository with all the following examples at this &lt;a href=&quot;https://github.com/tregua87/DockerNetwork&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
@@ -67,7 +63,18 @@ an experiment session.&lt;/p&gt;
 
 &lt;h2 id=&quot;preliminaries&quot;&gt;Preliminaries&lt;/h2&gt;
 
-&lt;p&gt;Before going to the meat, we need some preliminary installation.
+&lt;p&gt;Before going to the meat, we need some preliminary installation and configuration.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Configuration&lt;/strong&gt;&lt;br /&gt;
+All the following scripts/configuration files can be in the same folder.
+Therefore, I suggest you create a workspace folder such as:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mk dockernetwork
+cd dockernetwork
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;From this point ahead, I assume you run the commands in the folder &lt;code class=&quot;highlighter-rouge&quot;&gt;dockernetwork&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Installation&lt;/strong&gt;&lt;br /&gt;
 If you have already installed these tings, then, go ahead!&lt;br /&gt;
 Docker is a quite flexible technology that allows installing so-called
 containers.
@@ -110,6 +117,7 @@ pip3 install flask
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;entry-point&quot;&gt;Entry Point&lt;/h2&gt;
+
 &lt;p&gt;The entry point is a simple Web browser written in Python3 and Flask.
 Let’s have a look to this simple code.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/python3&lt;/span&gt;
@@ -128,7 +136,6 @@ Let’s have a look to this simple code.&lt;/p&gt;
 &lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/add'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;global&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;peerips&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# ip = request.args.get('peer-ip')&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remote_addr&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;peerips&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -144,9 +151,11 @@ Let’s have a look to this simple code.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chmod +x ./app_pc.py
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The scope of the entry point is quite simple, it receives a &lt;em&gt;ping&lt;/em&gt; from the peers
-and makes a local log.
-Clearly, this is just an example to show how peers and entry point exchange messages.&lt;/p&gt;
+&lt;p&gt;The scope of the entry point is quite simple.
+It is a simple Web server that is listening
+requests at the url &lt;code class=&quot;highlighter-rouge&quot;&gt;http:XX.XX.XX.XX:2222/add&lt;/code&gt;.
+At every &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request from a peer, the entry point extracts the IP address of
+the sender and save it in a local log file.&lt;/p&gt;
 
 &lt;h2 id=&quot;docker-image&quot;&gt;Docker Image&lt;/h2&gt;
 
@@ -159,17 +168,61 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install wget -y
 
-RUN mkdir -p /home/peer
-COPY . /home/peer/
-
 CMD wget 172.20.0.2:2222/add; sleep 50; echo &quot;My IP is `hostname -I | awk '{print $1}'`&quot; &amp;gt; local.txt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;The peer is quite simple. When it boots, it will contact the entry point by using
 a &lt;code class=&quot;highlighter-rouge&quot;&gt;wget&lt;/code&gt;. This action sends the peer IP to the entry point, which is then logged.&lt;/p&gt;
 
-&lt;p&gt;From the Dockerfile previously described, we create a Docker image by throwing:&lt;/p&gt;
+&lt;p&gt;From the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; previously described, we create a Docker image by throwing:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build -t &quot;docker-network-peer&quot; .
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This command creates an image described by the previous &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; and names it
+as &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-network-peer&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt;&lt;br /&gt;
+Here, I briefly explain the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;. However, I suggest you read a plethora of better
+and deeper tutorials that discuss &lt;a href=&quot;https://docs.docker.com/get-started/&quot; title=&quot;Docker Getting Starter&quot;&gt;Docker&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first line indicates the base OS on top of which we build our container.
+In our case, I start from a classic Ubuntu.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Docker exposes standard images for different OSes. This means that it is easy
+to have a minimum working OS, but the starting image might not be up-to-date.
+Therefore, we run some commands to update the system:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RUN apt-get update -y
+RUN apt-get upgrade -y
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;In the end, we install other tools we need, in our case a classic &lt;code class=&quot;highlighter-rouge&quot;&gt;wget&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RUN apt-get install wget -y
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;All the previous commands starts with &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;RUN&lt;/code&gt;. In a nutshell, these
+two keywords indicate commands that will be used only in the Docker creation phase.
+This means that they are executed only once. I still suggest you read a full
+guide.&lt;/p&gt;
+
+&lt;p&gt;The last line, instead, contains the current commands that describe the container
+behavior. Basically, it is the command that the container executes when it is
+booted. They are executed like bash commands.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CMD wget 172.20.0.2:2222/add; sleep 50; echo &quot;My IP is `hostname -I | awk '{print $1}'`&quot; &amp;gt; local.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Now, let’s have a look at the previous line. I unroll them down for a better
+understanding.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget 172.20.0.2:2222/add
+sleep 50
+echo &quot;My IP is `hostname -I | awk '{print $1}'`&quot; &amp;gt; local.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The first line is simply a &lt;code class=&quot;highlighter-rouge&quot;&gt;wget&lt;/code&gt; toward the entry point &lt;code class=&quot;highlighter-rouge&quot;&gt;172.20.0.2:2222/add&lt;/code&gt;.
+Then, the container sleeps for 50 seconds.
+Finally, the container finds its own IP and saves it in a local file within the
+container itself.&lt;/p&gt;
+
+&lt;p&gt;After the previous commands, the container stops itself.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;CMD&lt;/code&gt; can run much more complicate applications. In my paper, I start a software
+written in C. If this is the case, the container doesn’t stop until the software
+stops or the container is stopped externally.&lt;/p&gt;
 
 &lt;h2 id=&quot;network-configuration&quot;&gt;Network Configuration&lt;/h2&gt;
 
@@ -199,19 +252,45 @@ networks:
           - subnet: 172.20.0.0/16
             gateway: 172.20.0.2
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The first part of the configuration file indicates the service itself.
+You can think of it as the context in which the container will be executed.
+In this configuration, I need two simple things:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The container to execute: &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-network-peer:latest&lt;/code&gt;. The last version of our
+docker-network-peer that was previously explained.&lt;/li&gt;
+  &lt;li&gt;The network configuration for the peers: &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-network-test&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The network used in my example is described after the line &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-network-test:&lt;/code&gt;.
+Docker provides a number of different network configurations.
+The one more suitable for my purpuse is the &lt;code class=&quot;highlighter-rouge&quot;&gt;bridge&lt;/code&gt; (i.e., &lt;code class=&quot;highlighter-rouge&quot;&gt;driver: bridge&lt;/code&gt;).
+This setting creates a &lt;code class=&quot;highlighter-rouge&quot;&gt;TUN&lt;/code&gt; network interface in the host OS which
+allows intercommunication with the containers and the physical machine.&lt;/p&gt;
+
+&lt;p&gt;The network then requires further tuning:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- subnet: 172.20.0.0/16
+  gateway: 172.20.0.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;These two commands define the space address of the virtual network. The containers
+will pick an IP from this space.
+The &lt;code class=&quot;highlighter-rouge&quot;&gt;gateway&lt;/code&gt;, instead, will be used by the &lt;code class=&quot;highlighter-rouge&quot;&gt;TUN&lt;/code&gt; interface. Thus, when the containers
+contact this address, they will actually communicate with the host OS.&lt;/p&gt;
+
 &lt;p&gt;In the next session, we see how to run the entire network.&lt;/p&gt;
 
 &lt;h2 id=&quot;start-stop-and-network-control&quot;&gt;Start-stop and network control&lt;/h2&gt;
 
-&lt;p&gt;Open a shell and start the entry point:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 app_pc.py entrypoint.txt
+&lt;p&gt;Open a shell, go to &lt;code class=&quot;highlighter-rouge&quot;&gt;dockernetwork&lt;/code&gt;, and start the entry point:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd dockernetwork
+python3 app_pc.py entrypoint.txt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;In another shell, launch the peers:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker-compose up --scale peer=10
+&lt;p&gt;In another shell, go to &lt;code class=&quot;highlighter-rouge&quot;&gt;dockernetwork&lt;/code&gt;, launch the peers:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd dockernetwork
+docker-compose up --scale peer=10
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;The former command launches 10 peers.
 Then, wait until everything finishes.
-Finally, close the server with a classic &lt;code class=&quot;highlighter-rouge&quot;&gt;ctrl+c&lt;/code&gt;.&lt;/p&gt;
+Finally, close the entry point with a classic &lt;code class=&quot;highlighter-rouge&quot;&gt;ctrl+c&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;In my example, each peer shuts down itself.
 If your peer application is meant to run for an undetermined time, you can use a command like that:&lt;/p&gt;
@@ -263,6 +342,5 @@ Then, give some execution permission:&lt;/p&gt;
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;This example shows the basic steps to build, start, and stop a network of Docker containers.
-For simplicity, I collected all the previous scripts in a simple &lt;a href=&quot;https://github.com/tregua87/DockerNetwork&quot;&gt;repository&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Don’t hesitate to contact me for any reason!&lt;/p&gt;</content><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><category term="docker" /><category term="virtual-network" /><summary type="html">The goal of this article is to illustrate a basic Docker configuration that simulates a network of virtual devices. For sake of simplicity, each Docker container runs the same application, however, it is possible to run containers with different applications. Having a large network helps studying the behavior of distributed algorithms without handling physical or virtual machines. In addition, I also discuss a simple way to logging in a scalable manner.</summary></entry></feed>
+For simplicity, I collected all the previous scripts in a simple &lt;a href=&quot;https://github.com/tregua87/DockerNetwork&quot;&gt;repository&lt;/a&gt;.&lt;br /&gt;
+Don’t hesitate to contact me for any reason!&lt;/p&gt;</content><author><name>Flavio Toffalini</name><email>flavio_toffalini@mymail.sutd.edu.sg</email></author><category term="docker" /><category term="virtual-network" /><summary type="html">The goal of this article is to illustrate a basic Docker configuration that simulates a network of virtual devices. For sake of simplicity, each Docker container runs the same application, however, it is possible to run containers with different applications. Having a large network helps studying the behavior of distributed algorithms without handling physical or virtual machines. In addition, I also discuss a simple way to logging in a scalable manner.</summary></entry></feed>

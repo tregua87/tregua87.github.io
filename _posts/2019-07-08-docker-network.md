@@ -25,10 +25,6 @@ In this article, I will use a dummy network application.
 I however plan to release the full open source code, along with the research
 paper, after acceptance.
 
-**NOTE**  
-You can save all the following scripts and configuration files
-in the same folder and run all the commands in the that folder.
-
 **TL;TR;**  
 To make the work easier for the laziest, I made a small repository with all the following examples at this [link](https://github.com/tregua87/DockerNetwork).
 
@@ -68,7 +64,19 @@ an experiment session.
 
 ## Preliminaries ##
 
-Before going to the meat, we need some preliminary installation.
+Before going to the meat, we need some preliminary installation and configuration.
+
+**Configuration**  
+All the following scripts/configuration files can be in the same folder.
+Therefore, I suggest you create a workspace folder such as:
+```
+mk dockernetwork
+cd dockernetwork
+```
+
+From this point ahead, I assume you run the commands in the folder `dockernetwork`.
+
+**Installation**  
 If you have already installed these tings, then, go ahead!  
 Docker is a quite flexible technology that allows installing so-called
 containers.
@@ -114,6 +122,7 @@ pip3 install flask
 ```
 
 ## Entry Point ##
+
 The entry point is a simple Web browser written in Python3 and Flask.
 Let's have a look to this simple code.
 ```
@@ -133,7 +142,6 @@ peerips = sys.argv[1]
 @app.route('/add')
 def add():
     global peerips
-    # ip = request.args.get('peer-ip')
     ip = request.remote_addr
     if ip:
         with open(peerips, 'a') as l:
@@ -150,9 +158,11 @@ Also, don't forget.
 chmod +x ./app_pc.py
 ```
 
-The scope of the entry point is quite simple, it receives a *ping* from the peers
-and makes a local log.
-Clearly, this is just an example to show how peers and entry point exchange messages.
+The scope of the entry point is quite simple.
+It is a simple Web server that is listening
+requests at the url `http:XX.XX.XX.XX:2222/add`.
+At every `GET` request from a peer, the entry point extracts the IP address of
+the sender and save it in a local log file.
 
 ## Docker Image ##
 
@@ -166,18 +176,67 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install wget -y
 
-RUN mkdir -p /home/peer
-COPY . /home/peer/
-
 CMD wget 172.20.0.2:2222/add; sleep 50; echo "My IP is `hostname -I | awk '{print $1}'`" > local.txt
 ```
 The peer is quite simple. When it boots, it will contact the entry point by using
 a `wget`. This action sends the peer IP to the entry point, which is then logged.
 
-From the Dockerfile previously described, we create a Docker image by throwing:
+From the `Dockerfile` previously described, we create a Docker image by throwing:
 ```
 docker build -t "docker-network-peer" .
 ```
+This command creates an image described by the previous `Dockerfile` and names it
+as `docker-network-peer`.
+
+**Explanation**  
+Here, I briefly explain the `Dockerfile`. However, I suggest you read a plethora of better
+and deeper tutorials that discuss [Docker][4].
+
+The first line indicates the base OS on top of which we build our container.
+In our case, I start from a classic Ubuntu.
+```
+FROM ubuntu:latest
+```
+
+Docker exposes standard images for different OSes. This means that it is easy
+to have a minimum working OS, but the starting image might not be up-to-date.
+Therefore, we run some commands to update the system:
+```
+RUN apt-get update -y
+RUN apt-get upgrade -y
+```
+In the end, we install other tools we need, in our case a classic `wget`.
+```
+RUN apt-get install wget -y
+```
+
+All the previous commands starts with `FROM` and `RUN`. In a nutshell, these
+two keywords indicate commands that will be used only in the Docker creation phase.
+This means that they are executed only once. I still suggest you read a full
+guide.
+
+The last line, instead, contains the current commands that describe the container
+behavior. Basically, it is the command that the container executes when it is
+booted. They are executed like bash commands.
+```
+CMD wget 172.20.0.2:2222/add; sleep 50; echo "My IP is `hostname -I | awk '{print $1}'`" > local.txt
+```
+Now, let's have a look at the previous line. I unroll them down for a better
+understanding.
+```
+wget 172.20.0.2:2222/add
+sleep 50
+echo "My IP is `hostname -I | awk '{print $1}'`" > local.txt
+```
+The first line is simply a `wget` toward the entry point `172.20.0.2:2222/add`.
+Then, the container sleeps for 50 seconds.
+Finally, the container finds its own IP and saves it in a local file within the
+container itself.
+
+After the previous commands, the container stops itself.
+`CMD` can run much more complicate applications. In my paper, I start a software
+written in C. If this is the case, the container doesn't stop until the software
+stops or the container is stopped externally.
 
 ## Network Configuration ##
 
@@ -208,21 +267,46 @@ networks:
           - subnet: 172.20.0.0/16
             gateway: 172.20.0.2
 ```
+The first part of the configuration file indicates the service itself.
+You can think of it as the context in which the container will be executed.
+In this configuration, I need two simple things:
+- The container to execute: `docker-network-peer:latest`. The last version of our
+docker-network-peer that was previously explained.
+- The network configuration for the peers: `docker-network-test`.
+
+The network used in my example is described after the line `docker-network-test:`.
+Docker provides a number of different network configurations.
+The one more suitable for my purpuse is the `bridge` (i.e., `driver: bridge`).
+This setting creates a `TUN` network interface in the host OS which
+allows intercommunication with the containers and the physical machine.
+
+The network then requires further tuning:
+```
+- subnet: 172.20.0.0/16
+  gateway: 172.20.0.2
+```
+These two commands define the space address of the virtual network. The containers
+will pick an IP from this space.
+The `gateway`, instead, will be used by the `TUN` interface. Thus, when the containers
+contact this address, they will actually communicate with the host OS.
+
 In the next session, we see how to run the entire network.
 
 ## Start-stop and network control ##
 
-Open a shell and start the entry point:
+Open a shell, go to `dockernetwork`, and start the entry point:
 ```
+cd dockernetwork
 python3 app_pc.py entrypoint.txt
 ```
-In another shell, launch the peers:
+In another shell, go to `dockernetwork`, launch the peers:
 ```
+cd dockernetwork
 docker-compose up --scale peer=10
 ```
 The former command launches 10 peers.
 Then, wait until everything finishes.
-Finally, close the server with a classic `ctrl+c`.
+Finally, close the entry point with a classic `ctrl+c`.
 
 In my example, each peer shuts down itself.
 If your peer application is meant to run for an undetermined time, you can use a command like that:
@@ -284,3 +368,4 @@ Don't hesitate to contact me for any reason!
 [1]: https://www.hostinger.com/tutorials/how-to-install-and-use-docker-on-ubuntu/ "Docker installation"
 [2]: https://docs.docker.com/compose/install/ "Docker compose installation"
 [3]: https://en.wikipedia.org/wiki/Distributed_hash_table "Distributed Hash Table"
+[4]: https://docs.docker.com/get-started/ "Docker Getting Starter"
