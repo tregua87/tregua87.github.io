@@ -7,8 +7,8 @@ redirect_from:
 #  - /academicactivities
   - /academicactivities.html
 ---
-+ [2019] Visiting at [S2Lab@King's College London](https://s2lab.kcl.ac.uk/), supervised by [Lorenzo Cavallaro](https://www.kcl.ac.uk/people/lorenzo-cavallaro)
-Tipic: Trusted computing, System security
++ [2019] Visiting at [S2Lab@King's College London](https://s2lab.kcl.ac.uk/), supervised by [Lorenzo Cavallaro](https://www.kcl.ac.uk/people/lorenzo-cavallaro)  
+Topic: Trusted computing, System security
 
 + [2018] Visiting at [Spritz@University of Padua](http://spritz.math.unipd.it/), supervised by [Mauro Conti](http://www.math.unipd.it/~conti/)  
 Topic: Trusted computing, System security
