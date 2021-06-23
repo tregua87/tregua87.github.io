@@ -19,4 +19,8 @@ We thoroughly evaluate SnakeGX against StealthDB, which demonstrates the feasibi
 
 [Download paper here](https://www.flaviotoffalini.info/files/snakegx.pdf)
 
+[Slides (short-version)](https://www.slideshare.net/FlavioToffalini/snakegx-short-version)
+
+[Slides (full-version)](http://www.slideshare.net/FlavioToffalini/snakegx-full-version)
+
 [PoC](https://github.com/tregua87/snakegx/)
