@@ -1,0 +1,497 @@
+%
+% To compile run: 'xelatex CV2018.tex'
+%
+
+%--------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%--------------------------------------------------------------
+
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1.75cm]{geometry}
+\title{\bfseries\Large Flavio Toffalini}
+\author{}
+\date{}
+
+\usepackage{tabto}
+\usepackage{hyperref}
+  
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+%\cfoot{\thepage~of~2}
+
+\usepackage{array, xcolor}
+\definecolor{lightgray}{gray}{0.8}
+\newcolumntype{M}{>{\raggedleft}p{0.09\textwidth}}
+\newcolumntype{N}{p{0.9\textwidth}}
+\newcolumntype{L}{>{\raggedleft}p{0.15\textwidth}}
+\newcolumntype{R}{p{0.8\textwidth}}
+\newcommand\VRule{\color{lightgray}\vrule width 0.5pt}
+
+%\definecolor{darkred}{rgb}{0.804, 0.365, 0.365}
+\definecolor{darkred}{rgb}{0.790, 0.0118, 0.0275}
+\definecolor{electron}{rgb}{0.035, 0.518, 0.890}
+\definecolor{mint}{rgb}{ 0.000, 0.722, 0.580 }
+\definecolor{violet}{rgb}{ 0.424, 0.361, 0.906 }
+\definecolor{dblue}{rgb}{ 0.000, 0.300, 0.890 }
+\definecolor{darkgray}{gray}{0.45}
+
+\newcommand\darkdot{$\bm{\cdot}$\xspace}
+\newcommand{\venue}[2]{\textcolor{electron}{\href{#1}{#2}} $\bm{\cdot}$}%
+\newcommand{\coollink}[2]{\textcolor{electron}{\href{#1}{#2}}}%
+
+\newcommand{\desc}[1]{\textcolor{darkgray}{#1}}%
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\newcommand{\ie}{\textit{i.e.,} }
+\newcommand{\eg}{\textit{e.g.,} }
+\newcommand{\wrt}{\textit{w.r.t.\ }}
+
+\newcommand{\todobox}[3]{%
+	\colorbox{#1}{\textcolor{white}{\sffamily\bfseries\scriptsize #2}}%
+	~\textcolor{blue}{#3} %
+	\textcolor{#1}{$\triangleleft$}%
+}
+\newcommand{\todo}[1]{\todobox{red}{TODO}{#1}}
+\newcommand{\feedback}[1]{\todobox{orange}{OK?}{#1}}
+\newcommand{\done}[1]{\todobox{blue}{DONE}{#1}}
+\newcommand{\rationale}[1]{\todobox{ForestGreen}{RATIONALE}{#1}}
+
+
+\usepackage{bm}
+\begin{document}
+
+%\thispagestyle{empty}
+\begin{center}
+\Large Flavio Toffalini\\
+\end{center}
+
+%--------------------------------------------------------------
+%	ADDRESS AND CONTACT INFORMATION
+%--------------------------------------------------------------
+
+\begin{center}
+flavio\_toffalini@mymail.sutd.edu.sg\\
++65 8341 0549\\
+% \vspace{0.2em}
+\end{center}
+
+%--------------------------------------------------------------
+%	MAIN CV CONTENT
+%--------------------------------------------------------------
+
+% \vspace{.4em}
+\subsection*{Objective}
+Collaborating with professional teams for overcoming Information Security 
+limitations with integrity and ingenuity.
+My current research aims to improve DL for malware detection borrowing fresh 
+idea from program analysis' world.
+Previously, the core of my Ph.D. stretches the security properties of trusted 
+execution environments, in particular SGX, by integrating multiple disciplines 
+from program analysis, deep learning, network protocols, and cryptography.
+The goal of my work is to combine different perspectives in order to design 
+strong trustworthy systems for daily tasks.
+
+
+%--------------------------------------------------------------
+% ACADEMIC EXPERIENCE
+%--------------------------------------------------------------
+
+\subsection*{Education}
+
+\begin{tabular}{M!{\VRule}N}
+	
+	2017&{\bf Ph.D. student in Computer Science}\\
+	present&{\it Singapore University of Technology and Design (SUTD)}\\
+	& Supervisor: Prof. Jianying Zhou; Co-Advisor: Prof. Lorenzo Cavallaro 
+	\& Prof. Mauro Conti.\\ 
+	& \desc{5th year PhD programme with ISTD pillar studying the limitations of 
+		modern trusted execution environments.}\\
+	\\
+	
+	2015&{\bf M.S. in Computer Science and Engineering 108$/$110, GPA 3,9/4}\\
+	&{\it University of Verona, IT}\\
+	& Supervisor: Prof. Damiano Carra; Co-Advisor: Prof. Davide Balzarotti\\
+	& \desc{I wrote my thesis under the supervision of Prof. Carra Damiano and 
+		co-advised by Prof. Davide Blazarotti. The topic of my thesis expands 
+		the 
+		Google Dork project started in Eurecom (FR).
+		From the final thesis version, we extracted a research paper entitled 
+		``Google Dorks: Analysis, Creation, and new Defenses'' and published in 
+		DIMVA 2016.}\\
+	\\
+	
+	2009&{\bf B.S. in Computer Engineer 101$/$110, GPA 3,67/4}\\
+	&{\it University of Pavia, IT}\\
+	&Supervisor: Prof. Paolo Gamba\\
+	& \desc{I wrote my thesis under the supervision of Prof. Paolo Gamba. In 
+	the project, I studied new data acquisition techniques for IoT networks.}\\
+%	\\
+	
+\end{tabular}
+
+\subsection*{Visiting Research Scholar}
+
+\begin{tabular}{M!{\VRule}N}
+	
+	2021&{\bf Research Collaboration}\\
+	present&{\it King's College London, UK}\\
+	& \desc{I collaborate with Prof. Lorenzo Cavallaro's Systems Security 
+		Research Lab on a Multi-Task Learning project. I investigate the 
+		challenges 
+		of using MTL classifiers for malware analysis. The goal is to detect
+		fine-grained malicious behaviors linked to the MITRE ATT\&CK 
+		classification.}\\
+	\\
+	
+	Fall 2019&{\bf Visiting Ph.D. Scholar}\\
+	&{\it King's College London, UK}\\ 
+	& \desc{I collaborated with Prof. Lorenzo Cavallaro's Systems Security 
+	Research Lab on a project about the runtime integrity limitations of SGX 
+	enclaves. We designed and deployed a runtime remote attestation able to 
+	measure and validate the enclave execution-flow. Part of our outcome has 
+	been included in the publication ``Revisiting Program Analysis and 
+	Intrusion Detection for SGX'' which is currently under submission at CCS 
+	2021.} \\
+	\\
+	
+	2018&{\bf Visiting Ph.D. Scholar}\\
+	&{\it University of Padua, IT}\\
+	& \desc{I collaborated with Prof. Mauro Conti's Security and Privacy 
+	Research Group (SPRITZ Group). I studied the limitations of runtime remote 
+	attestations in complex software. 
+	Part of the outcome has been included in the publication ``ScaRR: Scalable 
+	Runtime Remote Attestation for Complex Systems'' and published in RAID 
+	2019.}\\
+	\\
+	
+	2015&{\bf Visiting fellow}\\
+	&{\it Eurecom, FR}\\
+	& \desc{I collaborated with Prof. Davide Balzarotti's System Security team 
+	on a Web security project focused on Google Dorks. The objective was the 
+	proposal of novel mitigation strategies and study automatic techniques for 
+	creating new Google Dorks.}\\	
+\end{tabular}
+
+\cfoot{1~of~4}
+
+\subsection*{Employment}
+
+\begin{tabular}{L!{\VRule}R}
+	
+	2016-2017&{\bf Research Assistant}\\
+	&{\it Singapore University of Technology and Design, SG}\\
+	& \desc{I worked on an Insider Threat project under the supervision of 
+	Prof. Ochoa Mart\`in and co-funded by ST Electronics (SG). The project's 
+	purpose was to study novel ML methodologies for detecting insider threats 	
+	and developing secure monitoring agents based on trusted computing 		
+	technologies.}\\
+	\\
+	
+	2015-2016&{\bf Research Assistant}\\
+	&{\it University of Verona, IT}\\
+	& \desc{I studied the limitations of static analysis in detecting context 
+	memory leaks in Android applications. The project was supervised by Prof. 
+	Fausto Spoto and co-funded by Julia Soft.}\\
+	\\
+	
+\end{tabular}
+
+\subsection*{Professional Development}
+
+\begin{tabular}{L!{\VRule}R}
+	
+	2021&{\bf Deep Learning Specialization}\\
+	&{\it Coursera at 
+	\coollink{https://www.deeplearning.ai/program/deep-learning-specialization/}{deeplearning.ai}}\\
+	& \desc{A six months class that covers many theoretical and practical 
+	aspects of Deep Learning: CNN, Transfer Learning, Object 
+	Detection,  NLP, GRU, LSTM, Attentions Models, and Multi-Head. 
+	Furthermore, the course provided deep knowledge of the Tensorflow 
+	framework.}
+	\\
+
+\end{tabular}
+
+%--------------------------------------------------------------
+% PUBLICATIONS
+%--------------------------------------------------------------
+
+\vspace{0.2em}
+\subsection*{Selected Publications}
+
+\begin{tabular}{L!{\VRule}R}
+
+2021 &{\bf Following the evidence beyond the wall:	memory forensic in SGX 
+environments}\\
+&{\it \textbf{F. Toffalini}, A. Oliveri, M. Graziano, J. Zhou, D. Balzarotti}\\
+& \venue{}{} under submission \\  
+& \desc{We study the impact of memory forensic techniques in SGX machines, 
+what information can be extracted and how to use them for analyzing modern SGX 
+malware.}\\
+\\
+&{\bf Revisiting Program Analysis and Intrusion Detection for SGX}\\
+&{\it \textbf{F. Toffalini}, J. Zhou, L. Cavallaro}\\ 
+& \venue{}{} under submission \\ 
+& \desc{We propose a runtime remote attestation that measures the execution 
+flow of an SGX enclave and allows a remote Verifier to validate the enclave 
+runtime integrity. We test our approach against modern enclave code-reuse 
+attacks.} \\
+\\
+&{\bf SnakeGX: a sneaky attack against SGX Enclaves}\\
+&{\it \textbf{F. Toffalini}, M. Graziano, M. Conti, J. Zhou}\\ 
+& \venue{https://github.com/tregua87/snakegx/blob/main/paper.pdf}{ACNS} The 
+19th International Conference on Applied Cryptography and Network Security 
+(ACNS) \\ 
+& \desc{We describe a data-only malware able to install a persistent 
+backdoor in a running enclave. The backdoor leaves a privilege entrance for 
+adversaries that can exfiltrate data in stealthy manner while leaving a limited 
+footprint in memory. We compare the traces left with other state of the art 
+attacks for SGX.}\\
+\\
+2019 &{\bf ScaRR: Scalable Runtime Remote Attestation for Complex Systems}\\
+&{\it \textbf{F. Toffalini}, E. Losiouk, Biondo A., J. Zhou, M. Conti}\\ 
+& 
+\venue{https://www.usenix.org/conference/raid2019/presentation/toffalini}{RAID} 
+The 22nd International Symposium on Research in Attacks, Intrusions and 
+Defenses (RAID) \\ 
+& \desc{We describe a model for runtime remote attestation that can represent 
+correct executions of complex software in a limited amount of memory. 
+We compare our approach with state of the art runtime models and show our 
+scalability properties.}\\
+\\
+&{\bf Insight Into Insiders and IT: A Survey of Insider Threat Taxonomies, 
+	Analysis, Modeling, and Countermeasures}\\
+&{\it I. Homoliak, \textbf{F. Toffalini}, J. Guarnizo, Y. Elovici, M. 
+	Ochoa}\\ 
+& \venue{https://dl.acm.org/doi/abs/10.1145/3303771}{CSUR} ACM Computing 
+Surveys (CSUR) \\ 
+& \desc{We study the state of the art of Insider Threats for IT. We 
+	identify 
+	common threats, propose a new taxonomy classification, and identify new 
+	challenges.}\\
+\end{tabular}
+
+\cfoot{2~of~4}
+
+\subsection*{}
+\begin{tabular}{M!{\VRule}N}
+	
+	&{\bf Careful-Packing: A Practical and Scalable Anti-Tampering 
+		Software Protection enforced by Trusted Computing}\\
+	&{\it \textbf{F. Toffalini}, M. Ochoa, J. Sun, and J. Zhou}\\ 
+	& \venue{https://dl.acm.org/doi/abs/10.1145/3292006.3300029}{CODASPY} The 
+	9th 
+	ACM Conference on Data and Application Security and Privacy (CODASPY)\\ 
+	&\desc{We propose a combination of TEE and anti-tampering techniques to 
+		strengthen code integrity over untrusted memory regions while using a 
+		limited memory in the TEE modules. Our solution introduces a small 
+		overhead 
+		of around 5\%.}\\
+	\\
+	2018 &{\bf Static Analysis of Context Leaks in Android Applications}\\
+	&{\it \textbf{F. Toffalini}, M. Ochoa, J. Sun, and J. Zhou}\\ 
+	& \venue{https://dl.acm.org/doi/abs/10.1145/3183519.3183530}{ICSE} The 40th 
+	International Conference on Software Engineering: Software Engineering in 
+	Practice (SEPA@ICSE)\\ 
+	&\desc{We study the problem of context leak in Android application and 
+		propose 
+		a simple yet effective static analysis to find such errors.}\\
+	\\
+	&{\bf Detection of Masqueraders Based on Graph Partitioning of File System 
+		Access Events}\\
+	&{\it \textbf{F. Toffalini}, I. Homoliak, A. Harilal, A. Binder, and M. 
+		Ochoa} \\ & 	
+		\venue{https://www.computer.org/csdl/proceedings-article/sp/2018/435301a964/12OmNC1Gugf}{SPW}
+	IEEE Security and Privacy Workshops (SPW) \\ 
+	&\desc{We propose a novel detection, based on graph comparison, that spots 
+		anomaly activities in sequence of events. We apply our approach over 
+		two open 
+		source datasets, WUIL and TWOS, achieving an AUC over 0,94 and 0.85, 
+		respectively.}\\
+	\\
+	2017&{\bf TWOS: A Dataset of Malicious Insider Threat Behavior Based on a 
+		Gamified Competition}\\
+	&{\it A. Harilal, \textbf{F. Toffalini}, J. Castellanos, J. Guarnizo, I. 
+		Homoliak,  and M. Ochoa}\\ 
+	& 
+	\venue{https://dl.acm.org/doi/10.1145/3139923.3139929}{MIST}
+	The 9th ACM CCS International Workshop on Managing Insider Security Threats 
+	(MIST) \\ 
+	&\desc{We present a dataset of insider threats obtained through a gamified 
+		competition that involved 6 teams of 4 students and that lasted for 
+		more than 
+		300 hours. We designed the game in order to simulate realistic insider 
+		threats 
+		scenarios.}\\
+	\\
+	2016&{\bf Google Dorks: Analysis, Creation, and new Defenses}\\
+	&{\it \textbf{F. Toffalini}, M. Abba', D. Carra, and D. Balzarotti}\\ 
+	& 
+	\venue{https://link.springer.com/chapter/10.1007/978-3-319-40667-1_13}{DIMVA}
+	Detection of Intrusions and Malware, and Vulnerability Assessment The 13th 
+	International Conference, (DIMVA)\\ 
+	&\desc{We study the impact of existing Google Dorks and proposed 
+		mitigation. 
+		In addition, we study new techniques to automatically generate new 
+		Google 
+		Dorks and propose relative mitigation.}\\
+	
+\end{tabular}
+%\cfoot{2~of~3}
+%--------------------------------------------------------------
+% WORK EXPERIENCE
+%--------------------------------------------------------------
+
+%\vspace{0.0em}
+%\subsection*{Industry Experience}
+%\begin{tabular}{L!{\VRule}R}
+%
+%Fall 2020&{\bf PhD Software Engineering Intern}\\
+%&{\it Facebook}\\
+%& \desc{Worked with the Compromised Accounts Measurement team to develop a 
+%system for automatically generating high precision policies to bootstrap 
+%labeling for large-scale compromised account detection and measurement tasks. 
+%Awarded a returning offer for 2021.}\\
+%\\
+%\end{tabular}
+
+%--------------------------------------------------------------
+%	REFERENCES
+%--------------------------------------------------------------
+
+%\vspace{2.4em} 
+%\textit{References available upon request}.
+\subsubsection*{References available upon request}
+\vspace{-0.3em}
+\begin{itemize}
+	\setlength{\itemsep}{1pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+	
+	\TabPositions{6.5cm}
+	\item Prof. Janying Zhou (Ph.D. Supervisor) \tab jianying\_zhou@sutd.edu.sg
+	\item Prof. Lorenzo Cavallaro (Ph.D co-advisor) \tab 
+	lorenzo.cavallaro@kcl.ac.uk
+	\item Prof. Mauro Conti (Ph.D. co-advisor) \tab mauro.conti@unipd.it
+	\item Prof. Davide Balzarotti (co-author) \tab davide.balzarotti@eurecom.fr
+	\item Mariano Graziano (co-author) \tab magrazia@cisco.com
+\end{itemize}
+
+%--------------------------------------------------------------
+%	VOLUNTEERING
+%--------------------------------------------------------------
+
+%--------------------------------------------------------------
+%	SERVICE
+%--------------------------------------------------------------
+
+%\vspace{-0.35em}
+
+%\vspace{0.06em}
+%\subsection*{Community Service}
+%
+%\vspace{-1.38em}
+\subsubsection*{PC Member}
+\vspace{-0.3em}
+\begin{itemize}
+	\setlength{\itemsep}{1pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+  
+	\TabPositions{5cm}
+	\item IEEE S\&P (Shadow PC) \tab 2021
+	\item SecMT \tab 2020, 2021
+\end{itemize}
+
+%
+%\subsubsection*{Committee}
+%\vspace{-0.3em}
+%\begin{itemize}
+%  \setlength{\itemsep}{1pt}
+%  \setlength{\parskip}{0pt}
+%  \setlength{\parsep}{0pt}
+%  
+%\TabPositions{4.3cm}
+%\end{itemize}
+
+%
+\vspace{-1.38em}
+\subsubsection*{Reviewer}
+\vspace{-0.3em}
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  
+\TabPositions{5cm}
+\item EuroSec (subreviewer) \tab 2021
+\item RAID (subreviewer) \tab 2020
+\item USENIX Security (subreviewer)\tab 2020
+\item ESORICS (subreviewer) \tab 2018
+\item TIFS (subreviewer) \tab 2018, 2019
+\end{itemize}
+
+%\vspace{-1.38em}
+\subsubsection*{Conference Volunteer}
+\vspace{-0.3em}
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  
+\TabPositions{5cm}
+\item ACM CCS 				\tab 2019
+\end{itemize}
+
+\cfoot{3~of~4}
+
+\subsubsection*{Teaching Assistant}
+\vspace{-0.3em}
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  
+\TabPositions{9cm, 10.5cm}
+\item Cyber Challenge Seminars \tab UNIPD \tab 2020
+\item 50.039 Theory and Practice of Deep Learning \tab SUTD \tab 2019
+\item 50.005 Computer System Engineering \tab SUTD \tab 2019
+\item Informatics and Bioinformatics \tab UNIPD \tab 2018
+\end{itemize}
+
+%\vspace{-1.38em}
+\subsubsection*{Other}
+\vspace{-0.3em}
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+
+%\item {\bf Founding team member} of both RHUL and KCL capture-the-flag 
+%competition teams. 
+\item {\bf MSc Co-supervision}: Mohamad Ridzuan Yusop, rebuilding ROP chains 
+from Intel PT traces.
+\item {\bf MSc Co-supervision}: Jon Kartago Lamida, comparing modern runtime 
+remote attestations models. 
+\item {\bf MSc Co-supervision}: Alessandro Visintin, design novel remote 
+attestation schemes for networks of IoT devices.
+\end{itemize}
+
+
+\cfoot{4~of~4}
+
+%--------------------------------------------------------------
+%	LANGUAGES
+%--------------------------------------------------------------
+
+\end{document}
+
+
+
+
