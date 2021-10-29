@@ -10,9 +10,9 @@ locale                   : "en-US"
 title                    : "Flavio Toffalini"
 title_separator          : "-"
 name                     : &name "Flavio Toffalini"
-description              : &description "Ph.D. Student SUTD"
-url                      : http://www.flaviotoffalini.info # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-# url                      : http://127.0.0.1:4000
+description              : &description "Post-Doc"
+# url                      : http://www.flaviotoffalini.info # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : http://127.0.0.1:4000
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "tregua87/tregua87.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
@@ -88,7 +88,7 @@ author:
   employer         :
   pubmed           :
   googlescholar    : "https://scholar.google.com/citations?user=3NPpxGIAAAAJ&hl=en"
-  email            : "flavio_toffalini@mymail.sutd.edu.sg"
+  email            : "flavio.toffalini@epfl.ch"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :

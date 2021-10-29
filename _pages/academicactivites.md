@@ -7,6 +7,12 @@ redirect_from:
 #  - /academicactivities
   - /academicactivities.html
 ---
++ [2021] PostDoc at [HexHive@EPFL](https://hexhive.epfl.ch/), supervised by [Mathias Payer](https://nebelwelt.net/)  
+Topic: Fuzzing, Software Analysis
+
++ [2021] Defended Ph.D. Thesis at [SUTD](http://www.sutd.edu.sg/)  
+Title: Challenges, threats, and novel defences for Trusted Execution Environments
+
 + [2019] Visiting at [S2Lab@King's College London](https://s2lab.kcl.ac.uk/), supervised by [Lorenzo Cavallaro](https://www.kcl.ac.uk/people/lorenzo-cavallaro)  
 Topic: Trusted computing, System security
 
