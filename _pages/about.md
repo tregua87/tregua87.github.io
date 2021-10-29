@@ -8,11 +8,11 @@ redirect_from:
   - /about.html
 ---
 Hi folks!  
-I am a geeky guy who likes cybersecurity. I mainly deal with trusted computing. In particular, I play with SGX and TrustZone, but not only.
+I am a geeky guy who likes cybersecurity.  I mainly deal with trusted computing. In particular, I play with SGX and TrustZone, but not only.
+Currently, I am moving to fuzzing and software analysis.
 
-I earned my Master Degree in Verona (Italy) under the supervision of assistant professor [Damiano Carra](http://profs.sci.univr.it/~carra/).
-
-At the moment I am a Ph.D. Student at [Singapore University of Technology and Design](http://www.sutd.edu.sg/) under the supervision of professor [Jianying Zhou](http://jianying.space/).
+I defenced my Ph.D. at [Singapore University of Technology and Design](http://www.sutd.edu.sg/) in September 2021.
+Currently, I am working as PostDoc with [Mathias Payer](https://nebelwelt.net/) in the [HexHive](https://hexhive.epfl.ch/).
 
 If you are interested in my works, let's browse the nav bar above.  
 Enjoy.
