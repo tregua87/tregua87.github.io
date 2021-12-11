@@ -5,7 +5,7 @@ permalink: /publication/2021-12-sgxforensic
 excerpt:
 date: "Dec 2021"
 venue: "Forensic Science International: Digital Investigation"
-paperurl: https://www.flaviotoffalini.info/files/snakegx.pdf
+paperurl: https://www.sciencedirect.com/science/article/abs/pii/S2666281721002389
 citation:
 ---
 
