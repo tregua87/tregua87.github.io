@@ -5,7 +5,7 @@ permalink: /publication/2021-12-sgxforensic
 excerpt:
 date: "Dec 2021"
 venue: "Forensic Science International: Digital Investigation"
-paperurl: https://www.sciencedirect.com/science/article/abs/pii/S2666281721002389
+paperurl: https://www.flaviotoffalini.info/files/sgx-forensic.pdf
 citation:
 ---
 
@@ -16,6 +16,6 @@ Software Guard eXtensions (SGX) is a hardware-based technology that introduces u
 
 We tested our techniques over a dataset of 45 SGX applications and we showed the practicality of our techniques in a real-product use-case and on two malware-enclaves.
 
-[Download paper here](https://www.sciencedirect.com/science/article/abs/pii/S2666281721002389)
+[Download paper here](https://www.flaviotoffalini.info/files/sgx-forensic.pdf)
 
 [PoC](https://github.com/tregua87/sgx-forensic)
