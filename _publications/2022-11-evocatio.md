@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2022-11-evocatio
 excerpt:
 date: "Nov 2022"
-venue: "2022 ACM SIGSAC Conference on Computer and Communications Security"
+venue: "ACM SIGSAC Conference on Computer and Communications Security"
 paperurl: https://www.flaviotoffalini.info/files/evocatio.pdf
 citation:
 ---
