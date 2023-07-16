@@ -1,7 +1,129 @@
 <html>
     <title>Flavio Toffalini</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <style>
+        li{
+            margin-bottom:1rem;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+
+            p = window.location.hash.substr(1);
+
+            $(".col").hide();
+            if (p != null)
+                $("#" + p).show();
+            else
+                $("#home").show();
+
+            $(".nav-item").on("click", function() {
+                id_element = $(this).children("a").attr("href")
+
+                if (!id_element.includes("cv.pdf")) {
+                    $(".col").hide();
+                    $(id_element).show();
+                }
+
+                $(".nav-item").removeClass("active")
+                $(this).addClass("active")
+            } );
+        });
+    </script>
     <body>
-        <h1>Flavio Toffalini</h1>
-        <p>Work in Progress</p>
+        <div class="container">
+            <nav class="justify-content-center navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#academic_activities">
+                            Academic Activities</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="./files/cv.pdf">CV</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#publications">Publications</a>
+                    </li>
+                </ul>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="col-3">
+                    <img class="img-fluid rounded-circle" src="./images/profile2.jpg" />
+                </div>
+                <div class="col" id="home">
+                    <h1>Short Bio</h1>
+                    <p>Hi folks!</p>
+                    <p>I am a geeky guy who likes cybersecurity.  I mainly deal with trusted computing. In particular, I play with SGX and TrustZone, but not only.</p>
+                    <p>Currently, I am moving to fuzzing and software analysis.</p>
+
+                    <p>I defended my Ph.D. at [Singapore University of Technology and Design](http://www.sutd.edu.sg/) in September 2021.
+                    Currently, I am working as PostDoc with [Mathias Payer](https://nebelwelt.net/) in the [HexHive](https://hexhive.epfl.ch/).</p>
+
+                    <p>
+                    If you are interested in my works, let's browse the nav bar above.  
+                    Enjoy.</p>
+
+                    <p>
+                        Contacts...
+                    </p>
+                </div>
+                <div class="col hide" id="academic_activities">
+                    <h1>Academic Activities</h1>
+
+                    <ul>
+                        <li>
+                            [2021] PostDoc at <a href="https://hexhive.epfl.ch/" target="_blank">HexHive@EPFL</a>, supervised by <a target="_black" href="https://nebelwelt.net/">Mathias Payer</a><br />Topic: Fuzzing, Software Analysis
+                        </li>
+                        <li>
+                            [2021] Defended Ph.D. Thesis at <a href="http://www.sutd.edu.sg/" target="_blank">SUTD</a><br />
+                            Title: Challenges, threats, and novel defenses for Trusted Execution Environments
+                        </li>
+                        <li>
+                            [2019] Visiting at <a href="https://s2lab.kcl.ac.uk/" target="_blank">S2Lab@King's College London</a>, supervised by <a href="https://www.kcl.ac.uk/people/lorenzo-cavallaro" target="_blank">Lorenzo Cavallaro</a><br />Topic: Trusted computing, System security
+                        </li>
+                        <li>
+                            [2018] Visiting at <a href="http://spritz.math.unipd.it/" target="_black">Spritz@University of Padua</a>, supervised by <a href="http://www.math.unipd.it/~conti/" target="_blank">Mauro Conti</a><br />Topic: Trusted computing, System security
+                        </li>
+                        <li>
+                            [2017] Ph.D. Student at <a href="http://www.sutd.edu.sg/" target="_blank">SUTD</a>, supervised by <a href="http://jianying.space/" target="_blank">Jianying Zhou</a><br />
+                            Topic: Trusted computing, System security
+                        </li>
+                        <li>
+                            [2016] Research Assistant at <a href="http://www.sutd.edu.sg/" target="_blank">SUTD</a>, supervised by <a href="https://scholar.google.com/citations?user=H5xFCoUAAAAJ&hl=en" target="_blank">Martin Ochoa</a><br />  
+                            Topic: Malicious insider detection, Trusted computing
+                        </li>
+                        <li>
+                            [2016] Research Assistant at <a href="http://www.di.univr.it/" target="_blank">University of Verona</a>, supervised by <a href="http://profs.sci.univr.it/~spoto/" target="_blank">Fausto Spoto</a><br />
+                            Topic: Static analysis of Android applications
+                        </li>
+                        <li>
+                            [2015] Master Degree at <a target="_blank" href="http://www.di.univr.it/">University of Verona</a>, supervised by <a target="_blank" href="http://profs.sci.univr.it/~carra/">Damiano Carra</a><br />
+                            Topic: Google Dorks, Web security
+                        </li>
+                        <li>
+                            [2015] Visiting at <a target="_blank" href="http://www.eurecom.fr/">Eurecom</a>, supervised by <a target="_blank" href="http://s3.eurecom.fr/~balzarot/">Davide Balzarotti</a><br />  
+                            Topic: Google Dorks, Web security
+                        </li>
+                    </ul>
+                </div>
+                <div class="col hide" id="publications">
+<!-- !!!!PUBLICATIONS!!!!! --><ul><li>Zheng H., Zhang J., Huang Y., Ren Z., Wang H., Cao C., Zhang Y., <b>Toffalini F.</b>, Payer M.. ''FishFuzz: Throwing Larger Nets to Catch Deeper Bugs'' Proceeding of the 32nd USENIX Security Symposium (Usenix SEC 2023)<br /></li><li>Xu J., Di Bartolomeo L., <b>Toffalini F.</b>, Mao B., Payer M.. ''WarpAttack: Bypassing CFI through Compiler-Introduced Double-Fetches'' Proceeding of the 44th IEEE Symposium on Security and Privacy (S&P 2023)<br /></li><li>Liu Q., <b>Toffalini F.</b>, Zhou Y., Payer M.. ''ViDeZZO: Dependency-aware Virtual Device Fuzzing'' Proceeding of the 44th IEEE Symposium on Security and Privacy (S&P 2023)<br /></li><li>Jiang Z., Gan S., Herrera A., <b>Toffalini F.</b>, Romerio L., Tang C., Egele M., Zhang C., Payer M.. ''Evocatio: Conjuring Bug Capabilities from a Single PoC'' Proceeding of the ACM SIGSAC Conference on Computer and Communications Security (CCS 2022)<br /></li><li><b>Toffalini F.</b>, Oliveri A., Graziano M., Zhou J., Balzarotti D.. ''The evidence beyond the wall: Memory forensics in SGX environments'' Forensic Science International: Digital Investigation, 2021<br /></li><li>Homoliak I., <b>Toffalini F.</b>, Guarnizo J., Elovici Y., Ochoa M.. ''Insight Into Insiders and IT: A Survey of Insider Threat Taxonomies, Analysis, Modeling, and Countermeasures'' ACM Computing Surveys (CSUR), 2019<br /></li></ul>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
