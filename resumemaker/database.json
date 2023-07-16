@@ -1,0 +1,87 @@
+[ 
+{
+    "title" : "FishFuzz: Throwing Larger Nets to Catch Deeper Bugs",
+    "venue" : "the 32nd USENIX Security Symposium (Usenix SEC 2023)",
+    "type" : "conference",
+    "date" : "202309",
+    "authors" : [
+        ["Han ", "Zheng"], 
+        ["Jiayuan", "Zhang"], 
+        ["Yuhang", "Huang"], 
+        ["Zezhong", "Ren"], 
+        ["He", "Wang"], 
+        ["Chunjie", "Cao"], 
+        ["Yuqing", "Zhang"], 
+        ["Flavio", "Toffalini"], 
+        ["Mathias", "Payer"]
+    ]
+}, 
+{
+    "title" : "WarpAttack: Bypassing CFI through Compiler-Introduced Double-Fetches",
+    "venue" : "the 44th IEEE Symposium on Security and Privacy (S\\&P 2023)",
+    "type" : "conference",
+    "date" : "202305",
+    "authors" : [
+        ["Jianhao", "Xu"], 
+        ["Luca", "Di Bartolomeo"], 
+        ["Flavio", "Toffalini"], 
+        ["Bing", "Mao"], 
+        ["Mathias", "Payer"]
+    ]
+},
+{
+    "title": "ViDeZZO: Dependency-aware Virtual Device Fuzzing",
+    "venue": "the 44th IEEE Symposium on Security and Privacy (S\\&P 2023)",
+    "date" : "202305",
+    "type" : "conference",
+    "authors": [
+        ["Qiang", "Liu"],
+        ["Flavio", "Toffalini"],
+        ["Yajin", "Zhou"],
+        ["Mathias", "Payer"]
+    ]
+},
+{
+    "title": "The evidence beyond the wall: Memory forensics in SGX environments",
+    "type": "journal",
+    "date": "202112",
+    "venue": "Forensic Science International: Digital Investigation",
+    "authors": [
+        ["Flavio", "Toffalini"],
+        ["Andrea", "Oliveri"],
+        ["Mariano", "Graziano"],
+        ["Jianying", "Zhou"],
+        ["Davide", "Balzarotti"]
+    ]
+},
+{
+    "title": "Insight Into Insiders and IT: A Survey of Insider Threat Taxonomies, Analysis, Modeling, and Countermeasures",
+    "type": "journal",
+    "date": "201904",
+    "venue": "ACM Computing Surveys (CSUR)",
+    "authors": [
+        ["Ivan", "Homoliak"],
+        ["Flavio", "Toffalini"],
+        ["Juan", "Guarnizo"],
+        ["Yuval", "Elovici"],
+        ["Mart\\'in", "Ochoa"]
+    ]
+},
+{
+    "title": "Evocatio: Conjuring Bug Capabilities from a Single PoC",
+    "type": "conference",
+    "date": "202211",
+    "venue": "the ACM SIGSAC Conference on Computer and Communications Security (CCS 2022)",
+    "authors": [
+        ["Zhiyuan","Jiang"],
+        ["Shuitao", "Gan"],
+        ["Adrian", "Herrera"],
+        ["Flavio", "Toffalini"],
+        ["Lucio", "Romerio"],
+        ["Chaojing", "Tang"],
+        ["Manuel", "Egele"],
+        ["Chao", "Zhang"],
+        ["Mathias", "Payer"]
+    ]
+}
+]
