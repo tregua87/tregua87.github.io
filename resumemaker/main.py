@@ -27,7 +27,7 @@ def emit_publications(db):
         year = e["date"][:4]
 
         pub_list += "<li>"
-        if p_type == "conference":
+        if p_type in ["conference", "workshop"]:
             pub_list += f"{author_list}. ''{title}'' Proceeding of {venue}<br />"
         elif p_type == "journal":
             pub_list += f"{author_list}. ''{title}'' {venue}, {year}<br />"
