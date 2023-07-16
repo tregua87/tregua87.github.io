@@ -5,18 +5,60 @@ from operator import itemgetter
 import subprocess
 
 AUTHOR_ME = "Toffalini F."
+PUB_PLACEHOLDER = "<!-- !!!!PUBLICATIONS!!!!! -->"
 
 def run_make(target):
     subprocess.run(["make", target]) 
 
+def update_cb():
+    subprocess.run(["cp", "cv/cv.pdf", "../files/"])
 
-def get_author_list(author_list_json):
+def emit_publications(db):
+
+    pub_list = "<ul>"
+    
+    new_db = sorted(db, key=lambda x: int(x['date']), reverse=True) 
+
+    for e in new_db:
+        p_type = e["type"]
+        author_list = get_author_list(e["authors"], True)
+        title = e["title"]
+        venue = e["venue"].replace("\&", "&")
+        year = e["date"][:4]
+
+        pub_list += "<li>"
+        if p_type == "conference":
+            pub_list += f"{author_list}. ''{title}'' Proceeding of {venue}<br />"
+        elif p_type == "journal":
+            pub_list += f"{author_list}. ''{title}'' {venue}, {year}<br />"
+        pub_list += "</li>"
+
+    pub_list += "</ul>"
+
+    fin = open("../index.html", "rt")
+    data = ""
+    for l in fin:
+        if PUB_PLACEHOLDER in l:
+            data += PUB_PLACEHOLDER + pub_list + "\n"
+        else:
+            data += l
+
+    fin.close()
+    fin = open("../index.html", "wt")
+    fin.write(data)
+    fin.close()
+
+
+def get_author_list(author_list_json, is_html = False):
     author_list = []
     for a in author_list_json:
         a_str = " ".join([a[1], a[0][0] + "."])
 
         if a_str == AUTHOR_ME:
-            author_list += [f"\\textbf{{{a_str}}}"]
+            if is_html:
+                author_list += [f"<b>{a_str}</b>"]
+            else:
+                author_list += [f"\\textbf{{{a_str}}}"]
         else:
             author_list += [a_str]
 
@@ -62,6 +104,8 @@ def emit_cv(db):
 
     run_make("cv_d")
 
+    update_cb()
+
 def __main():
 
     with open("database.json") as f:
@@ -69,6 +113,9 @@ def __main():
 
     print("Emit CV entries")
     emit_cv(db)
+
+    print("Emit publications")
+    emit_publications(db)
 
     print("done")
 
