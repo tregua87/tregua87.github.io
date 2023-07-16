@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1689495682 "/home/tregua/papers/tregua87.github.io/resumemaker/cv/cv.tex" "cv.pdf" "cv" 1689495682
+["pdflatex"] 1689524929 "/home/tregua/papers/tregua87.github.io/resumemaker/cv/cv.tex" "cv.pdf" "cv" 1689524929
   "/etc/texmf/web2c/texmf.cnf" 1679230402 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/tregua/papers/tregua87.github.io/resumemaker/cv/cv.tex" 1689495681 9429 92ab724f5252c7342813c82c73b0a414 ""
+  "/home/tregua/papers/tregua87.github.io/resumemaker/cv/cv.tex" 1689524929 5316 93101ff41b513daeb2bbb7fc96b4a373 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -41,9 +41,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1681542609 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1685605841 2799696 61dfdabc7875ea3f48ede5ae10b6e38f ""
-  "cv.aux" 1689495682 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
-  "cv.tex" 1689495681 9429 92ab724f5252c7342813c82c73b0a414 ""
-  "publication.tex" 1689495646 1498 4972f97635d26d0fb340a99584714c7c ""
+  "cv.aux" 1689524929 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
+  "cv.tex" 1689524929 5316 93101ff41b513daeb2bbb7fc96b4a373 ""
+  "publication.tex" 1689524913 2423 5eee55990f27bc1ab11506aeed4acab8 ""
   "resume.cls" 1689491786 5359 ef674bb45afb16ab364125d0e3e459f6 ""
   (generated)
   "cv.aux"

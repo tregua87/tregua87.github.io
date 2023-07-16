@@ -84,6 +84,20 @@ def emit_cv(db):
 
     f.write("\\end{enumerate}\n")
 
+    f.write("\\textbf{Workshop}")
+    f.write("\\begin{enumerate}[label={[W\\arabic*]},leftmargin=5mm]\n")
+    for e in new_db:
+        if e["type"] != "workshop":
+            continue
+        
+        author_list = get_author_list(e["authors"])
+        title = e["title"]
+        venue = e["venue"]
+
+        f.write(f"\item {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+
+    f.write("\\end{enumerate}\n")
+
     f.write("\\textbf{Journal}")
     f.write("\\begin{enumerate}[label={[J\\arabic*]},leftmargin=5mm]\n")
     for e in new_db:

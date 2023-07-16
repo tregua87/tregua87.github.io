@@ -11,6 +11,14 @@
         .hide {
             display: none;
         }
+
+        .contacts {
+            margin-top: 10pt;
+        }
+
+        .contacts a {
+            margin-left: 5pt;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -18,7 +26,7 @@
             p = window.location.hash.substr(1);
 
             $(".col").hide();
-            if (p != null)
+            if (p != null && p != "")
                 $("#" + p).show();
             else
                 $("#home").show();
@@ -63,6 +71,13 @@
             <div class="row">
                 <div class="col-3">
                     <img class="img-fluid rounded-circle" src="./images/profile2.jpg" />
+
+                    <p class="contacts">
+                        Contacts:
+                        <a href="mailto:flavio.toffalini@epfl.ch" target="_blank"><img style="width: 20px;height: 20px;" src="images/email-13728.png"></a>
+                        <a href="https://github.com/tregua87/" target="_blank"><img style="width: 20px;height: 20px;" src="images/github-mark.png"></a>
+                        <a href="https://twitter.com/tregua87" target="_blank"><img style="width: 20px;height: 20px;" src="images/logo-twitter-png-5860.png"></a>
+                    </p>
                 </div>
                 <div class="col" id="home">
                     <h1>Short Bio</h1>
@@ -70,16 +85,17 @@
                     <p>I am a geeky guy who likes cybersecurity.  I mainly deal with trusted computing. In particular, I play with SGX and TrustZone, but not only.</p>
                     <p>Currently, I am moving to fuzzing and software analysis.</p>
 
-                    <p>I defended my Ph.D. at [Singapore University of Technology and Design](http://www.sutd.edu.sg/) in September 2021.
-                    Currently, I am working as PostDoc with [Mathias Payer](https://nebelwelt.net/) in the [HexHive](https://hexhive.epfl.ch/).</p>
+                    <p>I defended my Ph.D. at <a href="http://www.sutd.edu.sg"
+                    target="_blank">Singapore University of Technology and
+                    Design</a> in September 2021. Currently, I am working as
+                    PostDoc with <a href="https://nebelwelt.net/"
+                    target="_blank">Mathias Payer</a> in the <a
+                    href="https://hexhive.epfl.ch/"
+                    target="_blank">HexHive</a>.</p>
 
                     <p>
                     If you are interested in my works, let's browse the nav bar above.  
                     Enjoy.</p>
-
-                    <p>
-                        Contacts...
-                    </p>
                 </div>
                 <div class="col hide" id="academic_activities">
                     <h1>Academic Activities</h1>
@@ -121,7 +137,7 @@
                     </ul>
                 </div>
                 <div class="col hide" id="publications">
-<!-- !!!!PUBLICATIONS!!!!! --><ul><li>Zheng H., Zhang J., Huang Y., Ren Z., Wang H., Cao C., Zhang Y., <b>Toffalini F.</b>, Payer M.. ''FishFuzz: Throwing Larger Nets to Catch Deeper Bugs'' Proceeding of the 32nd USENIX Security Symposium (Usenix SEC 2023)<br /></li><li>Xu J., Di Bartolomeo L., <b>Toffalini F.</b>, Mao B., Payer M.. ''WarpAttack: Bypassing CFI through Compiler-Introduced Double-Fetches'' Proceeding of the 44th IEEE Symposium on Security and Privacy (S&P 2023)<br /></li><li>Liu Q., <b>Toffalini F.</b>, Zhou Y., Payer M.. ''ViDeZZO: Dependency-aware Virtual Device Fuzzing'' Proceeding of the 44th IEEE Symposium on Security and Privacy (S&P 2023)<br /></li><li>Jiang Z., Gan S., Herrera A., <b>Toffalini F.</b>, Romerio L., Tang C., Egele M., Zhang C., Payer M.. ''Evocatio: Conjuring Bug Capabilities from a Single PoC'' Proceeding of the ACM SIGSAC Conference on Computer and Communications Security (CCS 2022)<br /></li><li><b>Toffalini F.</b>, Oliveri A., Graziano M., Zhou J., Balzarotti D.. ''The evidence beyond the wall: Memory forensics in SGX environments'' Forensic Science International: Digital Investigation, 2021<br /></li><li>Homoliak I., <b>Toffalini F.</b>, Guarnizo J., Elovici Y., Ochoa M.. ''Insight Into Insiders and IT: A Survey of Insider Threat Taxonomies, Analysis, Modeling, and Countermeasures'' ACM Computing Surveys (CSUR), 2019<br /></li></ul>
+<!-- !!!!PUBLICATIONS!!!!! --><ul><li>Zheng H., Zhang J., Huang Y., Ren Z., Wang H., Cao C., Zhang Y., <b>Toffalini F.</b>, Payer M.. ''FishFuzz: Throwing Larger Nets to Catch Deeper Bugs'' Proceeding of the 32nd USENIX Security Symposium (Usenix SEC 2023)<br /></li><li>Xu J., Di Bartolomeo L., <b>Toffalini F.</b>, Mao B., Payer M.. ''WarpAttack: Bypassing CFI through Compiler-Introduced Double-Fetches'' Proceeding of the 44th IEEE Symposium on Security and Privacy (S&P 2023)<br /></li><li>Liu Q., <b>Toffalini F.</b>, Zhou Y., Payer M.. ''ViDeZZO: Dependency-aware Virtual Device Fuzzing'' Proceeding of the 44th IEEE Symposium on Security and Privacy (S&P 2023)<br /></li><li><b>Toffalini F.</b>, Payer M., Zhou J., Cavallaro L.. ''Designing a Provenance Analysis for SGX Enclaves'' Proceeding of the 38th Annual Computer Security Applications Conference (ACSAC 2022)<br /></li><li>Jiang Z., Gan S., Herrera A., <b>Toffalini F.</b>, Romerio L., Tang C., Egele M., Zhang C., Payer M.. ''Evocatio: Conjuring Bug Capabilities from a Single PoC'' Proceeding of the ACM SIGSAC Conference on Computer and Communications Security (CCS 2022)<br /></li><li><b>Toffalini F.</b>, Graziano M., Conti M., Zhou J.. ''SnakeGX: a sneaky attack against SGX Enclaves'' Proceeding of the 19th International Conference on Applied Cryptography and Network Security (ACNS 2022)<br /></li><li><b>Toffalini F.</b>, Oliveri A., Graziano M., Zhou J., Balzarotti D.. ''The evidence beyond the wall: Memory forensics in SGX environments'' Forensic Science International: Digital Investigation, 2021<br /></li><li><b>Toffalini F.</b>, Losiouk E., Biondo A., Zhou J., Conti M.. ''ScaRR: Scalable Runtime Remote Attestation for Complex Systems'' Proceeding of the 22nd International Symposium on Research in Attacks, Intrusions and Defenses (RAID 2019)<br /></li><li><b>Toffalini F.</b>, Ochoa M., Sun J., Zhou J.. ''Careful-Packing: A Practical and Scalable Anti-Tampering Software Protection enforced by Trusted Computing'' Proceeding of the 9th ACM Conference on Data and Application Security and Privacy (CODASPY 2019)<br /></li><li>Homoliak I., <b>Toffalini F.</b>, Guarnizo J., Elovici Y., Ochoa M.. ''Insight Into Insiders and IT: A Survey of Insider Threat Taxonomies, Analysis, Modeling, and Countermeasures'' ACM Computing Surveys (CSUR), 2019<br /></li><li><b>Toffalini F.</b>, Sun J., Ochoa M.. ''Practical static analysis of context leaks in Android applications'' Software: Practice and Experience, 2019<br /></li><li><b>Toffalini F.</b>, Sun J., Ochoa M.. ''Static Analysis of Context Leaks in Android Applications'' Proceeding of the 40th International Conference on Software Engineering: Software Engineering in Practice (SEPA@ICSE)<br /></li><li></li><li>Harilal A., <b>Toffalini F.</b>, Homoliak I., John C., Guarnizo J., Mondal S., Ochoa M.. ''The Wolf Of SUTD (TWOS): A Dataset of Malicious Insider Threat Behavior Based on a Gamified Competition'' Journal of Wireless Mobile Networks, Ubiquitous Computing, and Dependable Applications (JoWUA), 2018<br /></li><li></li><li><b>Toffalini F.</b>, Abba' M., Carra D., Balzarotti D.. ''Google Dorks: Analysis, Creation, and new Defenses'' Proceeding of the 13th International Conference of Detection of Intrusions, Malware, and Vulnerability Assessment, (DIMVA 2016)<br /></li><li></li></ul>
                 </div>
             </div>
         </div>
