@@ -1,4 +1,18 @@
 [ 
+    {
+        "title" : "Crystallizer: A Hybrid Path Analysis Framework To Aid in Uncovering Deserialization Vulnerabilities",
+        "venue" : "the 31st ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE 2023)",
+        "type" : "conference",
+        "date" : "202312",
+        "authors" : [
+            ["Prashast", "Srivastava"],
+            ["Flavio", "Toffalini"], 
+            ["Kostyantyn", "Vorobyov"],
+            ["Francois", "Gauthier"],
+            ["Antonio", "Bianchi"],
+            ["Mathias", "Payer"]
+        ]
+    }, 
 {
     "title" : "FishFuzz: Throwing Larger Nets to Catch Deeper Bugs",
     "venue" : "the 32nd USENIX Security Symposium (Usenix SEC 2023)",
