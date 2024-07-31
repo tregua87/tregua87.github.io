@@ -1,4 +1,18 @@
 [ 
+
+    {
+        "title" : "TuneFuzz: Adaptively Exploring Target Programs",
+        "venue" : "the 17th Intl. Workshop on Search-Based and Fuzz Testing (SBFT 2024)",
+        "type" : "workshop",
+        "date" : "202404",
+        "authors" : [
+            ["Han ", "Zheng"], 
+            ["Flavio", "Toffalini"], 
+            ["Mathias", "Payer"]
+        ]
+    }, 
+
+
     {
         "title" : "Crystallizer: A Hybrid Path Analysis Framework To Aid in Uncovering Deserialization Vulnerabilities",
         "venue" : "the 31st ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE 2023)",
