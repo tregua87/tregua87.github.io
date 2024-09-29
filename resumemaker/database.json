@@ -1,4 +1,21 @@
 [ 
+    {
+        "title" : "EmbedWatch: Fat Pointer Solution for Detecting Spatial Memory Errors in Embedded Systems",
+        "venue" : "the 6th Workshop on CPS and IoT Security (CPSIoTSec)",
+        "type" : "workshop",
+        "date" : "202510",
+        "authors" : [
+            ["Davide", "Rusconi"], 
+            ["Matteo", "Zoia"], 
+            ["Luca", "Buccioli"],
+            ["Fabio", "Pierazzi"],
+            ["Danilo", "Bruschi"],
+            ["Lorenzo", "Cavallaro"],
+            ["Flavio", "Toffalini"],
+            ["Andrea", "Lanzi"]
+        ]
+    },
+
 
     {
         "title" : "TuneFuzz: Adaptively Exploring Target Programs",
