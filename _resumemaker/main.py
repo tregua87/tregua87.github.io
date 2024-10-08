@@ -6,6 +6,7 @@ import subprocess
 
 AUTHOR_ME = "Toffalini F."
 PUB_PLACEHOLDER = "<!-- !!!!PUBLICATIONS!!!!! -->"
+PUBLICATION_PAGE = "../_content/publications.html"
 
 def run_make(target):
     subprocess.run(["make", target]) 
@@ -23,7 +24,7 @@ def emit_publications(db):
         p_type = e["type"]
         author_list = get_author_list(e["authors"], True)
         title = e["title"]
-        venue = e["venue"].replace("\&", "&")
+        venue = e["venue"].replace("\\&", "&")
         year = e["date"][:4]
 
         pub_list += "<li>"
@@ -35,7 +36,7 @@ def emit_publications(db):
 
     pub_list += "</ul>"
 
-    fin = open("../index.html", "rt")
+    fin = open(PUBLICATION_PAGE, "rt")
     data = ""
     for l in fin:
         if PUB_PLACEHOLDER in l:
@@ -44,7 +45,7 @@ def emit_publications(db):
             data += l
 
     fin.close()
-    fin = open("../index.html", "wt")
+    fin = open(PUBLICATION_PAGE, "wt")
     fin.write(data)
     fin.close()
 
@@ -80,7 +81,7 @@ def emit_cv(db):
         title = e["title"]
         venue = e["venue"]
 
-        f.write(f"\item {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+        f.write(f"\\item {author_list}\\\\``{title}'' Proceeding of {venue}\n")
 
     f.write("\\end{enumerate}\n")
 
@@ -94,7 +95,7 @@ def emit_cv(db):
         title = e["title"]
         venue = e["venue"]
 
-        f.write(f"\item {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+        f.write(f"\\item {author_list}\\\\``{title}'' Proceeding of {venue}\n")
 
     f.write("\\end{enumerate}\n")
 
@@ -109,7 +110,7 @@ def emit_cv(db):
         venue = e["venue"]
         year = e["date"][:4]
 
-        f.write(f"\item {author_list}\\\\``{title}'' {venue}, {year}\n")
+        f.write(f"\\item {author_list}\\\\``{title}'' {venue}, {year}\n")
 
     f.write("\\end{enumerate}\n")
 
