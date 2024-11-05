@@ -23,37 +23,13 @@
     <script>
         $(document).ready(function() {
 
-
-
-            // p = window.location.hash.substr(1);
             p = document.location.pathname.match(/[^\/]+$/)[0];
-            // alert(p);
-
-            
             $(".nav-item").each(function(index) {
                 if ($(this).children("a").attr("href").includes(p)) {
                     $(".nav-item").removeClass("active")
                     $(this).addClass("active")
                 }
             });
-
-            /* $(".col").hide();
-            if (p != null && p != "")
-                $("#" + p).show();
-            else
-                $("#home").show();
-
-            $(".nav-item").on("click", function() {
-                id_element = $(this).children("a").attr("href")
-
-                if (!id_element.includes("cv.pdf")) {
-                    $(".col").hide();
-                    $(id_element).show();
-                }
-
-                $(".nav-item").removeClass("active")
-                $(this).addClass("active")
-            } ); */
         });
     </script>
     <body>

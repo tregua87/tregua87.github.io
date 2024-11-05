@@ -23,37 +23,13 @@
     <script>
         $(document).ready(function() {
 
-
-
-            // p = window.location.hash.substr(1);
             p = document.location.pathname.match(/[^\/]+$/)[0];
-            // alert(p);
-
-            
             $(".nav-item").each(function(index) {
                 if ($(this).children("a").attr("href").includes(p)) {
                     $(".nav-item").removeClass("active")
                     $(this).addClass("active")
                 }
             });
-
-            /* $(".col").hide();
-            if (p != null && p != "")
-                $("#" + p).show();
-            else
-                $("#home").show();
-
-            $(".nav-item").on("click", function() {
-                id_element = $(this).children("a").attr("href")
-
-                if (!id_element.includes("cv.pdf")) {
-                    $(".col").hide();
-                    $(id_element).show();
-                }
-
-                $(".nav-item").removeClass("active")
-                $(this).addClass("active")
-            } ); */
         });
     </script>
     <body>
@@ -210,18 +186,6 @@ interpreter testing. </p>
 <p>For any inquiries, feel free to contact him at <a
 
 href="mailto:flavio.toffalini@rub.de">flavio.toffalini@rub.de</a>.</p>
-
-<hr />
-
-<p>
-    <b>OPEN POSITIONS</b><br>
-    Calling all software testing enthusiasts! 🚀 We're on the lookout for PhD
-    students to join our research team at Ruhr-Universität Bochum (RUB). If
-    you're into interpreter fuzzing and ready to push the limits of automatic
-    software testing, let's talk! 💻     <br>
-    Interested? Contact me at <a
-    href="mailto:flavio.toffalini@rub.de">flavio.toffalini@rub.de</a>.</p>
-</p>
 
                 </div>
                 
