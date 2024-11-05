@@ -20,12 +20,24 @@
             margin-left: 5pt;
         }
     </style>
-    <!-- <script>
+    <script>
         $(document).ready(function() {
 
-            p = window.location.hash.substr(1);
 
-            $(".col").hide();
+
+            // p = window.location.hash.substr(1);
+            p = document.location.pathname.match(/[^\/]+$/)[0];
+            // alert(p);
+
+            
+            $(".nav-item").each(function(index) {
+                if ($(this).children("a").attr("href").includes(p)) {
+                    $(".nav-item").removeClass("active")
+                    $(this).addClass("active")
+                }
+            });
+
+            /* $(".col").hide();
             if (p != null && p != "")
                 $("#" + p).show();
             else
@@ -41,9 +53,9 @@
 
                 $(".nav-item").removeClass("active")
                 $(this).addClass("active")
-            } );
+            } ); */
         });
-    </script> -->
+    </script>
     <body>
         <div class="container bg-light">
             <nav class="justify-content-center navbar navbar-expand-lg navbar-light">

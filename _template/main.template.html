@@ -20,30 +20,18 @@
             margin-left: 5pt;
         }
     </style>
-    <!-- <script>
+    <script>
         $(document).ready(function() {
 
-            p = window.location.hash.substr(1);
-
-            $(".col").hide();
-            if (p != null && p != "")
-                $("#" + p).show();
-            else
-                $("#home").show();
-
-            $(".nav-item").on("click", function() {
-                id_element = $(this).children("a").attr("href")
-
-                if (!id_element.includes("cv.pdf")) {
-                    $(".col").hide();
-                    $(id_element).show();
+            p = document.location.pathname.match(/[^\/]+$/)[0];
+            $(".nav-item").each(function(index) {
+                if ($(this).children("a").attr("href").includes(p)) {
+                    $(".nav-item").removeClass("active")
+                    $(this).addClass("active")
                 }
-
-                $(".nav-item").removeClass("active")
-                $(this).addClass("active")
-            } );
+            });
         });
-    </script> -->
+    </script>
     <body>
         <div class="container bg-light">
             <nav class="justify-content-center navbar navbar-expand-lg navbar-light">
