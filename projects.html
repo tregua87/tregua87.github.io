@@ -101,128 +101,151 @@
                 <div class="col">
 <!-- !!!!CONTENT!!!!! --><!-- main.template.html -->
 
+<h1>Projects</h1>
 
 
-<h1>About Me</h1>
-
-
-
-
-
-<p>Dr. Flavio Toffalini is a cybersecurity researcher and newly appointed
-
-assistant professor at Ruhr-Universität Bochum (<a target="_blank"
-
-href="https://www.ruhr-uni-bochum.de/en">RUB</a>) starting September 2024. His
-
-research expertise lies in system security, with a focus on automatic software
-
-testing, threat mitigation, and trusted computing technologies.</p>
-
-
-
-
-
-<p  style="border: 3px solid black; padding: 10px;">
-
-<b>OPEN PHD POSITIONS</b><br>
-
-Calling all software testing enthusiasts! 🚀 We're on the lookout for PhD
-
-students to join our research team at Ruhr-Universität Bochum (RUB). If you're
-
-into fuzzing and ready to push the limits of automatic software testing, let's
-
-talk! 💻 
-
-<!-- <br> -->
-
-Interested? Contact me at <a
-
-href="mailto:flavio.toffalini@rub.de">flavio.toffalini@rub.de</a>.
-
-<br>
-
-<br>
-
-
-
-<!-- </p> -->
-
-<!-- <p  style="border: 3px solid black; padding: 10px;"> -->
-
-<b>LOOKING FOR A BACHELOR'S OR A MASTER'S THESIS PROJECT?</b><br>
-
-My research interests stretch beyond automated testing and reach other system
-
-security areas. Explore potential <a href="projects.html">topics</a>. If you
-
-already have an idea, feel free to reach out! I am happy to listen to personal
-
-proposals.
-
-
-
-</p>
-
-
-
-<p>Dr. Toffalini earned his Ph.D. from the Singapore University of Technology
-
-and Design (<a target="_blank" href="http://www.sutd.edu.sg">SUTD</a>) under the
-
-supervision of Professor <a target="_blank"
-
-href="http://jianying.space/">Jianying Zhou</a>. His doctoral thesis explored
-
-the intersection of trusted execution environments—particularly SGX and
-
-TrustZone—and software engineering, identifying new attack surfaces and
-
-proposing innovative defense mechanisms.</p>
-
-
-
-<p>Following his Ph.D., Dr. Toffalini joined the <a target="_blank"
-
-href="https://hexhive.epfl.ch/">HexHive</a> group as a Postdoctoral Researcher
-
-under the guidance of Professor <a target="_blank"
-
-href="https://nebelwelt.net/">Mathias Payer</a>. During his stay at EPFL, he
-
-expanded his expertise in automatic software testing and threat mitigation.</p>
-
-
-
-<p>At RUB, Dr. Toffalini continues his pioneering research in system security.
-
-He is actively recruiting Ph.D. students to join his team and contribute to
-
-cutting-edge projects in automatic software testing, threat mitigation, and
-
-trusted computing. Current opportunities include research on browser and
-
-interpreter testing. </p>
-
-
-
-<p>For any inquiries, feel free to contact him at <a
-
-href="mailto:flavio.toffalini@rub.de">flavio.toffalini@rub.de</a>.</p>
-
-<hr />
 
 <p>
-    <b>OPEN POSITIONS</b><br>
-    Calling all software testing enthusiasts! 🚀 We're on the lookout for PhD
-    students to join our research team at Ruhr-Universität Bochum (RUB). If
-    you're into interpreter fuzzing and ready to push the limits of automatic
-    software testing, let's talk! 💻     <br>
-    Interested? Contact me at <a
-    href="mailto:flavio.toffalini@rub.de">flavio.toffalini@rub.de</a>.</p>
+
+This is a list of possible available topis suitable for MSc, BSc, or simple
+
+semester projects.</br>
+
+
+
+Each project is adjustable according to the student skills. However, to ensure a
+
+fruitful interaction, and make your project really worthy, I <b>strongly</b>
+
+recommend you read the <b>general prerequisite</b> here below, and then the
+
+topic description. If any of the following idea attracts you, or something is
+
+unclear, do not hesitate to contact me at <a
+
+href="mailto:flavio.toffalini@rub.de">flavio.toffalini@rub.de</a>. I am also
+
+open to projects spontaneously proposed by student as long as they adhere to my
+
+research area: software analysis, vulnerability analysis, mitigation, system
+
+security. 
+
 </p>
 
+
+
+<h5>General Prerequisite</h5>
+
+<p>
+
+Every topic requires specific skills. However, for smooth collaboration,
+
+students must have a basic understanding of Linux OS, Git, and bash programming.
+
+I assume you have a good knowledge of Python, which is a fundamental Swiss Army
+
+knife for many tasks. Depending on the project, you may also be required to
+
+learn specific tools, skills, or technologies, such as C/C++, LLVM, reverse
+
+engineering, or fuzzing.
+
+</p>
+
+
+
+<h5>List of Topics</h5>
+
+
+
+<p>
+
+The following topics serve as an indication of my areas of interest. Many of
+
+them can be combined if we identify a feasible project. Think of this list as a
+
+menu; if you find something you're already familiar with, feel free to email me,
+
+and we can discuss it. As a rule of thumb, combining topics generally increases
+
+project difficulty.
+
+</p>
+
+
+
+<ul>
+
+    <li><b>Generic Fuzzzing</b>, playing with <a
+
+    href="https://github.com/AFLplusplus/AFLplusplus" target="_blank">AFL++</a>
+
+    and <a href="https://github.com/AFLplusplus/LibAFL"
+
+    target="_blank">libAFL</a>. If you're eager to find bugs in a specific
+
+    target, we can discuss it!</li>
+
+    <li><b>Interpreted Fuzzing</b>, with a focus on <a
+
+    href="https://github.com/googleprojectzero/fuzzilli/"
+
+    target="_blank">Fuzzilli</a>. We may extend Fuzzilli to new programming
+
+    languages (e.g., Python).</li>
+
+    <li><b>Reverse Engineering</b>. How hard would it be to translate assembly code to
+
+    C++? ;)</li>
+
+    <li><b>Software Analysis</b>, you will explore various static analysis
+
+    techniques, possibly working on and extending <a
+
+    href="https://github.com/SVF-tools/SVF" target="_blank">SVF</a>. This topic
+
+    may evolve into a compiler pass to implement mitigation strategies. A strong
+
+    background in <a href="https://github.com/llvm/llvm-project" target="_blank"
+
+    >LLVM</a> is preferred.
+
+    </li>
+
+    <li>Many minor and major projects on <b>Trusted Execution Environment
+
+    (TEE)</b> involving 
+
+        <a href="https://github.com/intel/linux-sgx" target="_blank">SGX</a> or
+
+        <a href="https://github.com/ARM-software/arm-trusted-firmware"
+
+        target="_blank">TrustZone</a>, but also spanning to <a
+
+        href="https://github.com/canonical/tdx" target="_blank">Intel TDX</a> or
+
+        <a
+
+        href="https://github.com/google/sanitizers/wiki/Stack-instrumentation-with-ARM-Memory-Tagging-Extension-(MTE)/5dc1d66c34d5fbf50daf3e27de590e1a62e85e56"
+
+        target="_blank">ARM MTE</a> . This topic is very flexible and can be
+
+        stretched to remote attestation or embedded security.
+
+    </li>
+
+    <li>
+
+        <b>Microarchitectural</b> issues are more of a hobby area in my
+
+        research; feel free to approach me, and we can explore possible ideas
+
+        together.
+
+    </li>
+
+</ul>
                 </div>
                 
             </div>
