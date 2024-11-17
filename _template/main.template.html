@@ -19,6 +19,14 @@
         .contacts a {
             margin-left: 5pt;
         }
+
+        .teammember li {
+            margin:0;
+        }
+
+        .teammember {
+            margin-top: 15pt;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -30,6 +38,10 @@
                     $(this).addClass("active")
                 }
             });
+
+            if (p == "team.html") {
+                $("#lateral_column").hide();
+            }
         });
     </script>
     <body>
@@ -56,6 +68,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="projects.html">Projects</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="team.html">Team</a>
+                    </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#teaching">Teaching</a>
                     </li> -->
@@ -63,7 +78,7 @@
                 </div>
             </nav>
             <div class="row">
-                <div class="col-3">
+                <div id="lateral_column" class="col-3">
                     <img class="img-fluid rounded-circle" src="./images/profile3.jpg" />
 
                     <p class="contacts">
