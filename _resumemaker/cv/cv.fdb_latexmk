@@ -1,13 +1,7 @@
 # Fdb version 4
-<<<<<<< HEAD
-["pdflatex"] 1730827255.50781 "/home/tregua87/misc/tregua87.github.io/_resumemaker/cv/cv.tex" "cv.pdf" "cv" 1730827255.84491 0
-  "/etc/texmf/web2c/texmf.cnf" 1726581633.61518 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/tregua87/misc/tregua87.github.io/_resumemaker/cv/cv.tex" 1730827205.29008 5432 53a50fe87b42fe4b06718a354c501eec ""
-=======
-["pdflatex"] 1733839162.32507 "/home/tregua87/misc/tregua87.github.io/_resumemaker/cv/cv.tex" "cv.pdf" "cv" 1733839163.17636 0
+["pdflatex"] 1733839285.23744 "/home/tregua87/misc/tregua87.github.io/_resumemaker/cv/cv.tex" "cv.pdf" "cv" 1733839286.00443 0
   "/etc/texmf/web2c/texmf.cnf" 1726581633.61518 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/tregua87/misc/tregua87.github.io/_resumemaker/cv/cv.tex" 1733839161.93304 5432 53a50fe87b42fe4b06718a354c501eec ""
->>>>>>> master
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -51,15 +45,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1726581649.94704 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1726581743 8215727 c81f36b2a48eefe0a0a850342f3e531e ""
-<<<<<<< HEAD
-  "cv.aux" 1730827255.81601 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
-  "cv.tex" 1730827205.29008 5432 53a50fe87b42fe4b06718a354c501eec ""
-  "publication.tex" 1730827255.34002 5005 d4495e7fc8fa5254481d8393861dc443 ""
-=======
-  "cv.aux" 1733839163.11805 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
+  "cv.aux" 1733839285.95305 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
   "cv.tex" 1733839161.93304 5432 53a50fe87b42fe4b06718a354c501eec ""
-  "publication.tex" 1733839161.93304 5005 d4495e7fc8fa5254481d8393861dc443 ""
->>>>>>> master
+  "publication.tex" 1733839284.93805 5005 d4495e7fc8fa5254481d8393861dc443 ""
   "resume.cls" 1730827205.29108 5359 ef674bb45afb16ab364125d0e3e459f6 ""
   (generated)
   "cv.aux"
