@@ -72,7 +72,9 @@ def emit_cv(db):
     new_db = sorted(db, key=lambda x: int(x['date']), reverse=True) 
 
     f.write("\\textbf{Conference}")
-    f.write("\\begin{enumerate}[label={[C\\arabic*]},leftmargin=5mm]\n")
+    f.write("\\begin{enumerate}[leftmargin=5mm]\n")
+    # f.write("\\begin{enumerate}[label={[C\\arabic*]},leftmargin=5mm]\n")
+    cnt = len([e for e in new_db  if e["type"] == "conference"])
     for e in new_db:
         if e["type"] != "conference":
             continue
@@ -81,12 +83,14 @@ def emit_cv(db):
         title = e["title"]
         venue = e["venue"]
 
-        f.write(f"\\item {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+        f.write(f"\\item[C{cnt}] {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+        cnt = cnt - 1
 
     f.write("\\end{enumerate}\n")
 
     f.write("\\textbf{Workshop}")
-    f.write("\\begin{enumerate}[label={[W\\arabic*]},leftmargin=5mm]\n")
+    cnt = len([e for e in new_db  if e["type"] == "workshop"])
+    f.write("\\begin{enumerate}[leftmargin=5mm]\n")
     for e in new_db:
         if e["type"] != "workshop":
             continue
@@ -95,12 +99,14 @@ def emit_cv(db):
         title = e["title"]
         venue = e["venue"]
 
-        f.write(f"\\item {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+        f.write(f"\\item[W{cnt}] {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+        cnt = cnt - 1
 
     f.write("\\end{enumerate}\n")
 
     f.write("\\textbf{Journal}")
-    f.write("\\begin{enumerate}[label={[J\\arabic*]},leftmargin=5mm]\n")
+    cnt = len([e for e in new_db  if e["type"] == "journal"])
+    f.write("\\begin{enumerate}[leftmargin=5mm]\n")
     for e in new_db:
         if e["type"] != "journal":
             continue
@@ -110,7 +116,9 @@ def emit_cv(db):
         venue = e["venue"]
         year = e["date"][:4]
 
-        f.write(f"\\item {author_list}\\\\``{title}'' {venue}, {year}\n")
+        f.write(f"\\item[J{cnt}] {author_list}\\\\``{title}'' {venue}, {year}\n")
+        # f.write(f"\\item {author_list}\\\\``{title}'' {venue}, {year}\n")
+        cnt = cnt - 1
 
     f.write("\\end{enumerate}\n")
 
