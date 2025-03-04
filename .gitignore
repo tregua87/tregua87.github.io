@@ -2,7 +2,7 @@ _site/
 _site/*
 .tags
 .tags1
-resumemaker/cv/cv.log
-resumemaker/cv/cv.rubbercache
-resumemaker/cv/cv.fls
-resumemaker/cv/cv.fdb_latexmk
+_resumemaker/cv/cv.log
+_resumemaker/cv/cv.rubbercache
+_resumemaker/cv/cv.fls
+_resumemaker/cv/cv.fdb_latexmk
