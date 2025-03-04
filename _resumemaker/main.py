@@ -27,11 +27,13 @@ def emit_publications(db):
         venue = e["venue"].replace("\\&", "&")
         year = e["date"][:4]
 
+        award_str = get_award(e, True)
+
         pub_list += "<li>"
         if p_type in ["conference", "workshop"]:
-            pub_list += f"{author_list}. ''{title}'' Proceeding of {venue}<br />"
+            pub_list += f"{author_list} ''{title}'' Proceeding of {venue} {award_str}<br />"
         elif p_type == "journal":
-            pub_list += f"{author_list}. ''{title}'' {venue}, {year}<br />"
+            pub_list += f"{author_list} ''{title}'' {venue}, {year} {award_str}<br />"
         pub_list += "</li>"
 
     pub_list += "</ul>"
@@ -63,7 +65,21 @@ def get_author_list(author_list_json, is_html = False):
         else:
             author_list += [a_str]
 
-    return ", ".join(author_list)
+    # from IPython import embed; embed(); exit(1)
+    if len(author_list) == 1:
+        return author_list[0]
+    else:
+        return ", ".join(author_list[:-1]) + ", and " + author_list[-1]
+        
+
+def get_award(entry, is_html = False):
+
+    if "award" in entry:
+        if is_html:
+            return f" - <b>{entry['award']}</b>"
+        else:
+            return f" - \\textbf{{{entry['award']}}}"
+    return ""
 
 def emit_cv(db):
 
@@ -83,7 +99,9 @@ def emit_cv(db):
         title = e["title"]
         venue = e["venue"]
 
-        f.write(f"\\item[C{cnt}] {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+        award_str = get_award(e)
+
+        f.write(f"\\item[C{cnt}] {author_list}\\\\``{title}'' Proceeding of {venue} {award_str}\n")
         cnt = cnt - 1
 
     f.write("\\end{enumerate}\n")
@@ -99,7 +117,9 @@ def emit_cv(db):
         title = e["title"]
         venue = e["venue"]
 
-        f.write(f"\\item[W{cnt}] {author_list}\\\\``{title}'' Proceeding of {venue}\n")
+        award_str = get_award(e)
+
+        f.write(f"\\item[W{cnt}] {author_list}\\\\``{title}'' Proceeding of {venue} {award_str}\n")
         cnt = cnt - 1
 
     f.write("\\end{enumerate}\n")
@@ -116,7 +136,9 @@ def emit_cv(db):
         venue = e["venue"]
         year = e["date"][:4]
 
-        f.write(f"\\item[J{cnt}] {author_list}\\\\``{title}'' {venue}, {year}\n")
+        award_str = get_award(e)
+
+        f.write(f"\\item[J{cnt}] {author_list}\\\\``{title}'' {venue}, {year} {award_str}\n")
         # f.write(f"\\item {author_list}\\\\``{title}'' {venue}, {year}\n")
         cnt = cnt - 1
 

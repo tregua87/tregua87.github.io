@@ -1,9 +1,38 @@
 [ 
     {
+        "title" : "DUMPLING: Fine-grained Differential JavaScript Engine Fuzzing",
+        "venue" : "the 32th Network and Distributed System Security Symposium (NDSS 2025)",
+        "type" : "conference",
+        "date" : "202502",
+        "authors" : [
+            ["Liam", "Wachter"],
+            ["Julian", "Gremminger"], 
+            ["Christian", "Wressnegger"],
+            ["Mathias", "Payer"],
+            ["Flavio", "Toffalini"]
+        ],
+        "award" : "Distinguished Paper"
+    },
+
+    {
+        "title" : "type++: Prohibiting Type Confusion With Inline Type Information",
+        "venue" : "the 32th Network and Distributed System Security Symposium (NDSS 2025)",
+        "type" : "conference",
+        "date" : "202502",
+        "authors" : [
+            ["Nicolas", "Badoux"],
+            ["Flavio", "Toffalini"],
+            ["Yuseok", "Jeon"],
+            ["Mathias", "Payer"]
+        ],
+        "award" : "Distinguished Paper"
+    },
+
+    {
         "title" : "EmbedWatch: Fat Pointer Solution for Detecting Spatial Memory Errors in Embedded Systems",
         "venue" : "the 6th Workshop on CPS and IoT Security (CPSIoTSec)",
         "type" : "workshop",
-        "date" : "202510",
+        "date" : "202410",
         "authors" : [
             ["Davide", "Rusconi"], 
             ["Matteo", "Zoia"], 
@@ -113,6 +142,20 @@
     ]
 },
 {
+    "title": "HolA: Holistic and autonomous attestation for IoT networks",
+    "type": "workshop",
+    "date": "202206",
+    "venue": "the Applied Cryptography and Network Security Workshops (ACNS 2022)",
+    "authors": [
+        ["Alessandro", " Visintin"],
+        ["Flavio", "Toffalini"],
+        ["Eleonora", "Losiouk"], 
+        ["Mauro", "Conti"],
+        ["Jianying", "Zhou"]
+    ],
+    "award" : "Best Paper"
+},
+{
     "title": "Evocatio: Conjuring Bug Capabilities from a Single PoC",
     "type": "conference",
     "date": "202211",
@@ -144,7 +187,7 @@
 {
     "title": "SnakeGX: a sneaky attack against SGX Enclaves",
     "type": "conference",
-    "date": "202206",
+    "date": "202106",
     "venue": "the 19th International Conference on Applied Cryptography and Network Security (ACNS 2022)",
     "authors": [
         ["Flavio", "Toffalini"],
