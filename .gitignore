@@ -5,4 +5,7 @@ _site/*
 _resumemaker/cv/cv.log
 _resumemaker/cv/cv.rubbercache
 _resumemaker/cv/cv.fls
+_resumemaker/cv/cv.aux
 _resumemaker/cv/cv.fdb_latexmk
+_resumemaker/cv/cv.pdf
+files/cv.pdf
