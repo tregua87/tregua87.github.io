@@ -1,5 +1,58 @@
 [ 
     {
+        "title": "Sourcerer: channeling the void",
+        "type": "conference",
+        "date": "202507",
+        "venue": "the 22th International Conference of Detection of Intrusions, Malware, and Vulnerability Assessment (DIMVA 2025)",
+        "authors": [
+            ["Nicolas", "Badoux"],
+            ["Flavio", "Toffalini"],
+            ["Mathias", "Payer"]
+        ]
+    },
+
+    {
+        "title" : "Liberating libraries through automated fuzz driver generation: Striking a Balance Without Consumer Code",
+        "venue" : "the ACM International Conference on the Foundations of Software Engineering (FSE 2025)",
+        "type" : "conference",
+        "date" : "202506",
+        "authors" : [
+            ["Flavio", "Toffalini"],
+            ["Nicolas", "Badoux"],
+            ["Zurab", "Tsinadze"],
+            ["Mathias", "Payer"]
+        ]
+    },
+
+    {
+        "title" : "MendelFuzz: The Return of the Deterministic Stage",
+        "venue" : "the ACM International Conference on the Foundations of Software Engineering (FSE 2025)",
+        "type" : "conference",
+        "date" : "202506",
+        "authors" : [
+            ["Han", "Zheng"],
+            ["Flavio", "Toffalini"],
+            ["Marcel", "Böhme"],
+            ["Mathias", "Payer"]
+        ]
+    },
+
+    {
+        "title" : "TLBlur: Compiler-assisted automated hardening against controlled channels on off-the-shelf Intel SGX platforms",
+        "venue" : "the 34nd USENIX Security Symposium (Usenix SEC 2025)",
+        "type" : "conference",
+        "date" : "202508",
+        "authors" : [
+            ["Daan", "Vanoverloop"],
+            ["Andres", "Sanchez"],
+            ["Flavio", "Toffalini"],
+            ["Frank", "Piessens"],
+            ["Mathias", "Payer"],
+            ["Jo", "Van Bulck"]
+        ]
+    },
+
+    {
         "title" : "DUMPLING: Fine-grained Differential JavaScript Engine Fuzzing",
         "venue" : "the 32th Network and Distributed System Security Symposium (NDSS 2025)",
         "type" : "conference",
