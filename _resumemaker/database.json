@@ -1,4 +1,73 @@
 [ 
+
+    {
+        "title": "TYPEFUZZ: Type Coverage Directed JavaScript Engine Fuzzing (Registered Report)",
+        "type": "workshop",
+        "date": "202602",
+        "venue": "5th International Fuzzing Workshop (FUZZING) 2026",
+        "authors": [
+            ["Tobias", "Wienand"],
+            ["Lukas", "Bernhard"],
+            ["Flavio", "Toffalini"]
+        ]
+    },
+  
+    {
+        "title": "E-FuzzEdge: Efficient In-Place Firmware Fuzzing via Parallel Scheduling (Short Paper)",
+        "type": "workshop",
+        "date": "202602",
+        "venue": "5th International Fuzzing Workshop (FUZZING) 2026",
+        "authors": [
+            ["Davide", "Rusconi"],
+            ["Osama", "Yousef"],
+            ["Mirco", "Picca"],
+            ["Danilo", "Bruschi"],
+            ["Flavio", "Toffalini"],
+            ["Andrea", "Lanzi"]
+        ]
+    },
+
+    {
+        "title": "Squeezing Juicy Variant Bugs Out of Modern Browsers",
+        "type": "conference",
+        "date": "202608",
+        "venue": "the 20th USENIX WOOT Conference on Offensive Technologies (WOOT 2026)",
+        "authors": [
+            ["Han", "Zheng"],
+            ["Flavio", "Toffalini"],
+            ["Qiang", "Liu"],
+            ["Mathias", "Payer"]
+        ]
+    },
+
+    {
+        "title": "SemSan: A Configurable Sanitizer for Detecting Semantic Bugs",
+        "type": "conference",
+        "date": "202608",
+        "venue": "the 20th USENIX WOOT Conference on Offensive Technologies (WOOT 2026)",
+        "authors": [
+            ["Moritz", "Sanft"],
+            ["Flavio", "Toffalini"]
+        ]
+    },
+
+    {
+        "title": "Jazzer: Coverage-Guided Fuzzing for Semantic Vulnerabilities in the Java Ecosystem",
+        "type": "conference",
+        "date": "202605",
+        "venue": "the 47th IEEE Symposium on Security and Privacy (S\\&P 2026)",
+        "authors": [
+            ["Sergej", "Dechand"],
+            ["Tobias", "Wienand"],
+            ["Fabian", "Meumertzheim"],
+            ["Peter", "Samarin"],
+            ["Simon", "Resch"],
+            ["Khaled", "Yakdan"],
+            ["Thorsten", "Holz"],
+            ["Flavio", "Toffalini"]
+        ]
+    },
+
     {
         "title": "Sourcerer: channeling the void",
         "type": "conference",
@@ -200,7 +269,7 @@
     "date": "202206",
     "venue": "the Applied Cryptography and Network Security Workshops (ACNS 2022)",
     "authors": [
-        ["Alessandro", " Visintin"],
+        ["Alessandro", "Visintin"],
         ["Flavio", "Toffalini"],
         ["Eleonora", "Losiouk"], 
         ["Mauro", "Conti"],

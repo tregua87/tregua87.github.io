@@ -4,7 +4,9 @@ import json
 from operator import itemgetter
 import subprocess
 
-AUTHOR_ME = "Toffalini F."
+AUTHOR_ME_1 = "Toffalini F."
+AUTHOR_ME_2 = "Flavio T."
+AUTHOR_ME_3 = "Toffalini~F."
 PUB_PLACEHOLDER = "<!-- !!!!PUBLICATIONS!!!!! -->"
 PUBLICATION_PAGE = "../_content/publications.html"
 
@@ -54,10 +56,16 @@ def emit_publications(db):
 
 def get_author_list(author_list_json, is_html = False):
     author_list = []
-    for a in author_list_json:
-        a_str = " ".join([a[1], a[0][0] + "."])
+    for i, a in enumerate(author_list_json):
+        # if i == 0:
+        #     a_str = " ".join([a[0], a[1][0] + "."])
+        # else:
+        if is_html:
+            a_str = " ".join([a[1], a[0][0] + "."])
+        else:
+            a_str = "~".join([a[1], a[0][0] + "."])
 
-        if a_str == AUTHOR_ME:
+        if a_str in [AUTHOR_ME_1, AUTHOR_ME_2, AUTHOR_ME_3]:
             if is_html:
                 author_list += [f"<b>{a_str}</b>"]
             else:
