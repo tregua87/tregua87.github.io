@@ -1,6 +1,22 @@
 [ 
 
     {
+        "title": "RemOTA: Remote attestation for detecting use-after-free in low-power microcontrollers",
+        "type": "journal",
+        "date": "202607",
+        "venue": "Computers & Security",
+        "authors": [
+            ["Matteo", "Zoia"],
+            ["Mirco", "Picca"],
+            ["Davide", "Rusconi"],
+            ["Andrea", "Monzani"],
+            ["Flavio", "Toffalini"],
+            ["Danilo", "Bruschi"],
+            ["Andrea", "Lanzi"]
+        ]
+    },
+
+    {
         "title": "TYPEFUZZ: Type Coverage Directed JavaScript Engine Fuzzing (Registered Report)",
         "type": "workshop",
         "date": "202602",
@@ -37,7 +53,8 @@
             ["Flavio", "Toffalini"],
             ["Qiang", "Liu"],
             ["Mathias", "Payer"]
-        ]
+        ],
+        "award" : "Best Paper"
     },
 
     {
